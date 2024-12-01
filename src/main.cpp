@@ -24,7 +24,7 @@ void led(void* args){
 
 /*
 RUN AND COMPILE
-pio run && pio run --target upload && git-all && pio device monitor
+pio run && git-all && pio run --target upload && pio device monitor
 
 
 */
