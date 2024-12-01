@@ -18,12 +18,12 @@ void led(void* args){
     if(i == 0){
       i = 1000;
     }
-    Serial.printf("%i\n");
+    Serial.printf("%i\n", i);
   }
 }
 
 /*
-RUN AND COMPILE
+RUN AND COMPILE (with git-all)
 pio run; git-all; pio run --target upload && pio device monitor
 
 
