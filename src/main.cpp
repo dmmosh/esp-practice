@@ -87,8 +87,8 @@ void loop() {
     i = 2;
   }
 
-  if (y_set> 205){
-    x_set +=50;
+  if (y_set> 195){
+    x_set +=150;
     y_set = 35;
   }
   tft.printf("i use arch btw\n");
