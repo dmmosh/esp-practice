@@ -53,7 +53,7 @@ void setup() {
   tft.println("HELLO WORLD");
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 250);
-  tft.fillRect(0,0, 320,170, TFT_BLACK);
+  tft.fillRect(1,10, 320,170, TFT_BLACK);
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
   //tft.setRotation(1);  // Set display rotation (optional)
