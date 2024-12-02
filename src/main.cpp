@@ -66,14 +66,14 @@ void setup() {
   // Initialize the TFT display
   tft.begin();
   tft.setRotation(0);  // Set orientation if needed
-  tft.fillScreen(TFT_BLUE); // Clear the screen
+  tft.fillScreen(TFT_WHITE); // Clear the screen
 
   // Set text color and size
-  tft.setTextColor(TFT_WHITE);
-  tft.setTextSize(2);
+  tft.setTextColor(TFT_BLACK);
+  tft.setTextSize(1);
 
   // Display text
-  tft.setCursor(0, 0);  // Set text cursor position
+  tft.setCursor(20,20);
   tft.println("Hello, World!");
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
 
