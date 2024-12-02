@@ -75,7 +75,7 @@ void setup() {
   tft.setCursor(10, 10);  // Set cursor position
   tft.println("Background is Black");
   pinMode(BACKLIGHT, OUTPUT);
-  analogWrite(BACKLIGHT, 250);
+  analogWrite(BACKLIGHT, 255);
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
 
