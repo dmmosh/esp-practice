@@ -45,11 +45,9 @@ void setup() {
   lv_init();
   lv_tick_set_cb(my_tick);
 
-  lv_display_t * disp;
-  disp = lv_display_create(X_RES, TFT_VER_RES);
-
-  lv_display_set_flush_cb(disp, my_disp_flush);
-  lv_display_set_buffers(disp, draw_buf, NULL, sizeof(draw_buf), LV_DISPLAY_RENDER_MODE_PARTIAL);
+  lv_obj_t *label = lv_label_create( lv_screen_active() );
+  lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
+  lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
 
 
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
