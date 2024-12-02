@@ -104,7 +104,7 @@ void my_disp_flush( lv_display_t *disp, const lv_area_t *area, uint8_t * px_map)
 
     tft.startWrite();
     tft.setAddrWindow(area->x1, area->y1, area->x2, area->y2);
-    tft.pushColor((uint16_t)px_map, width * height);
+    tft.pushColor((uint16_t)*px_map, width * height);
     tft.endWrite();
 
     /*Call it to tell LVGL you are ready*/
