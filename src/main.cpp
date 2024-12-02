@@ -10,6 +10,7 @@
 #define BACKLIGHT 32 //backlight cpio
 #define X_RES 100
 #define Y_RES 100
+#define CURR lv_screen_active() //current active screen 
 
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 uint32_t draw_buf[DRAW_BUF_SIZE / 4];
@@ -48,8 +49,10 @@ void setup() {
   lv_display_set_rotation(disp, LV_DISP_ROTATION_90);
 
 
-  lv_obj_t *label = lv_label_create( lv_screen_active() );
+  lv_obj_t *label = lv_label_create( CURR );
   lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
+  lv_obj_set_style_bg_color(CURR, LV_COLOR_MAKE(100,100,100),0);
+
   lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
   Serial.println( "Setup done" );
   
