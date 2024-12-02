@@ -11,8 +11,8 @@
 #define X_RES TFT_WIDTH
 #define Y_RES TFT_HEIGHT
 #define CURR lv_scr_act() //current active screen 
-
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
+TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
 
 void led(void* args){
@@ -31,12 +31,14 @@ void led(void* args){
 }
 
 
-TFT_eSPI tft = TFT_eSPI(); // Create TFT object
-unsigned int lastTick = millis();
 
+
+/*
+pio run; git-all; pio run --target upload && pio device monitor -b 115200
+*/
 
 void setup() {
-  Serial.begin(9600); //listen on port 9600
+  Serial.begin(115200); //listen on port 9600
   //tft.init(); // init serial connection
   //analogWrite(BACKLIGHT, 255); // make brightness max
   //pinMode(BACKLIGHT, OUTPUT); // set brightness
@@ -59,8 +61,6 @@ void setup() {
 }
 
 void loop() {
-  lv_tick_inc(millis() - lastTick);
-  lastTick = millis();
 
 
   lv_timer_handler();
