@@ -9,11 +9,9 @@
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
 #define X_RES 100
-#define Y_RED 100
-#define LV_USE_TFT_ESPI 1
-LV_TFT_ESPI_H
+#define Y_RES 100
 
-#define DRAW_BUF_SIZE (X_RES * Y_RED / 10 * (LV_COLOR_DEPTH / 8))
+#define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 uint32_t draw_buf[DRAW_BUF_SIZE / 4];
 
 
