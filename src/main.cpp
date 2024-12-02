@@ -101,55 +101,7 @@ uint8_t newgrid[GRIDX][GRIDY];
 //Number of generations
 uint16_t genCount = 0;
 
-void setup()   {
-  xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
-  //Set up the display
-  tft.init();
-  tft.setRotation(3);
-  tft.fillScreen(TFT_BLACK);
-  tft.setTextSize(1);
-  tft.setTextColor(TFT_WHITE);
-  tft.setCursor(0, 0);
 
-}
-
-void loop() {
-
-  //Display a simple splash screen
-  tft.fillScreen(TFT_BLACK);
-  tft.setTextSize(2);
-  tft.setTextColor(TFT_WHITE);
-  tft.setCursor(40, 5);
-  tft.println(F("Arduino"));
-  tft.setCursor(35, 25);
-  tft.println(F("Cellular"));
-  tft.setCursor(35, 45);
-  tft.println(F("Automata"));
-
-  delay(1000);
-
-  tft.fillScreen(TFT_BLACK);
-
-  initGrid();
-
-  genCount = MAX_GEN_COUNT;
-
-  drawGrid();
-
-  //Compute generations
-  for (int gen = 0; gen < genCount; gen++)
-  {
-    computeCA();
-    drawGrid();
-    delay(GEN_DELAY);
-    for (int16_t x = 1; x < GRIDX-1; x++) {
-      for (int16_t y = 1; y < GRIDY-1; y++) {
-        grid[x][y] = newgrid[x][y];
-      }
-    }
-
-  }
-}
 
 //Draws the grid on the display
 void drawGrid(void) {
@@ -233,3 +185,54 @@ int getNumberOfNeighbors(int x, int y) {
    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
    SOFTWARE.
 */
+
+
+void setup()   {
+  xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
+  //Set up the display
+  tft.init();
+  tft.setRotation(3);
+  tft.fillScreen(TFT_BLACK);
+  tft.setTextSize(1);
+  tft.setTextColor(TFT_WHITE);
+  tft.setCursor(0, 0);
+
+}
+
+void loop() {
+
+  //Display a simple splash screen
+  tft.fillScreen(TFT_BLACK);
+  tft.setTextSize(2);
+  tft.setTextColor(TFT_WHITE);
+  tft.setCursor(40, 5);
+  tft.println(F("Arduino"));
+  tft.setCursor(35, 25);
+  tft.println(F("Cellular"));
+  tft.setCursor(35, 45);
+  tft.println(F("Automata"));
+
+  delay(1000);
+
+  tft.fillScreen(TFT_BLACK);
+
+  initGrid();
+
+  genCount = MAX_GEN_COUNT;
+
+  drawGrid();
+
+  //Compute generations
+  for (int gen = 0; gen < genCount; gen++)
+  {
+    computeCA();
+    drawGrid();
+    delay(GEN_DELAY);
+    for (int16_t x = 1; x < GRIDX-1; x++) {
+      for (int16_t y = 1; y < GRIDY-1; y++) {
+        grid[x][y] = newgrid[x][y];
+      }
+    }
+
+  }
+}
