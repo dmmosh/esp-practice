@@ -39,23 +39,28 @@ pio run; git-all; pio run --target upload && pio device monitor -b 115200
 
 void setup() {
   Serial.begin(115200); //listen on port 9600
-  //tft.init(); // init serial connection
-  //analogWrite(BACKLIGHT, 255); // make brightness max
-  //pinMode(BACKLIGHT, OUTPUT); // set brightness
+  tft.init(); // init serial connection
+  analogWrite(BACKLIGHT, 255); // make brightness max
+  pinMode(BACKLIGHT, OUTPUT); // set brightness
+
+  tft.fillScreen(TFT_WHITE);
+  tft.setTextColor(TFT_BLACK);
+  tft.setTextSize(2);
+  tft.println("HELLO WORLD");
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL); //blinking led task
   //tft.setRotation(1);  // Set display rotation (optional)
-  lv_init();
-  //lv_tick_set_cb(my_tick);
+  // lv_init();
+  // //lv_tick_set_cb(my_tick);
 
-  draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
-  lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
+  // draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
+  // lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
 
 
-  lv_obj_t *label = lv_label_create( CURR );
-  lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
-  lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
+  // lv_obj_t *label = lv_label_create( CURR );
+  // lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
+  // lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
 
-  Serial.println( "Setup done" );
+  // Serial.println( "Setup done" );
 
 
 }
@@ -63,6 +68,6 @@ void setup() {
 void loop() {
 
 
-  lv_timer_handler();
+  //lv_timer_handler();
   // You can add more functionality here
 }
