@@ -55,7 +55,7 @@ void setup() {
   lv_obj_set_style_bg_color(CURR, LV_COLOR_MAKE(100,100,100),0);
 
   Serial.println( "Setup done" );
-  
+    
 
 }
 
