@@ -89,11 +89,11 @@ void loop() {
   tft.setCursor(x_set, y_set);
   //x_set += 10;
   y_set+= 15;
-  if (i==3){
+  if (i>2){
     tft.fillScreen(TFT_BLACK);
     x_set = 5;
     y_set=35;
-    i=2;
+    i=1;
     tft.setCursor(x_set, y_set);
   }
   delay(1200);
