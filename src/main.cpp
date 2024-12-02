@@ -88,11 +88,12 @@ void loop() {
   }
 
   if (y_set> 205){
+    x_set +=10;
     y_set = 35;
   }
-  tft.printf(">be me\n>spend days coding esp32\n>no solid tutorials online\n>finally works\n>happy");
+  tft.printf("i use arch btw\n");
   tft.setCursor(x_set, y_set);
-  x_set += 30;
+  //x_set += 10;
   y_set+= 60;
   delay(2000);
   //lv_timer_handler();
