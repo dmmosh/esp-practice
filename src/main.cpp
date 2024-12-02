@@ -50,7 +50,7 @@ void setup() {
   tft.fillScreen(TFT_BLACK);
   
   // Print some text
-  tft.setTextColor(0xff0043);  // Set text color to black
+  tft.setTextColor(0xf80c);  // Set text color to black
   tft.setTextSize(2);  // Set text size
 
   //tft.println("HELLO WORLD");
