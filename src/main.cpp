@@ -79,13 +79,6 @@ void setup() {
 
 
 void loop() {
-  if (i>2){
-    tft.fillScreen(TFT_BLACK);
-    x_set = 5;
-    y_set=35;
-    i=2;
-    tft.setCursor(x_set, y_set);
-  }
   
   if (y_set> 195){
     i++;
@@ -96,6 +89,13 @@ void loop() {
   tft.setCursor(x_set, y_set);
   //x_set += 10;
   y_set+= 15;
+  if (i==3){
+    tft.fillScreen(TFT_BLACK);
+    x_set = 5;
+    y_set=35;
+    i=2;
+    tft.setCursor(x_set, y_set);
+  }
   delay(1200);
   //lv_timer_handler();
   // You can add more functionality here
