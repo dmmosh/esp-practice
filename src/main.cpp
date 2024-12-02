@@ -45,8 +45,8 @@ void setup() {
   lv_init();
   //lv_tick_set_cb(my_tick);
 
-  lv_display_t* disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
-  lv_display_set_rotation(disp, LV_DISP_ROTATION_90);
+  lv_display_t* disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, sizeof(draw_buf));
+  //lv_display_set_rotation(disp, LV_DISP_ROTATION_90);
 
 
   lv_obj_t *label = lv_label_create( CURR );
