@@ -61,7 +61,7 @@ void led(void* args){
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   // Initialize the TFT display
   tft.begin();
