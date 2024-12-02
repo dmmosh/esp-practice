@@ -40,7 +40,7 @@ pio run; git-all; pio run --target upload && pio device monitor -b 115200
 void setup() {
   Serial.begin(115200); //listen on port 9600
   tft.init();
-  tft.setRotation(5);  // Set display rotation (optional)
+  tft.setRotation(1);  // Set display rotation (optional)
 
   // Change background to black
   tft.fillScreen(TFT_WHITE);
