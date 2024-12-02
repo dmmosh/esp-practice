@@ -37,6 +37,10 @@ void led(void* args){
 pio run; git-all; pio run --target upload && pio device monitor -b 115200
 */
 
+unsigned int x_set = 5; 
+unsigned int y_set = 35; 
+unsigned int i = 1;
+
 void setup() {
   Serial.begin(115200); //listen on port 9600
   tft.init();
@@ -49,8 +53,7 @@ void setup() {
   tft.setTextColor(TFT_BLACK);  // Set text color to black
   tft.setTextSize(2);  // Set text size
 
-  tft.setCursor(10, 100);  // Set cursor position
-  tft.println("HELLO WORLD");
+  //tft.println("HELLO WORLD");
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 250);
   //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
@@ -71,11 +74,9 @@ void setup() {
   // Serial.println( "Setup done" );
 
 
+  tft.setCursor(x_set, y_set);  // Set cursor position
 }
 
-unsigned int x_set = 5; 
-unsigned int y_set = 35; 
-unsigned int i = 1;
 
 void loop() {
   if (x_set > 320){
