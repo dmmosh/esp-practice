@@ -38,8 +38,8 @@ unsigned int lastTick = millis();
 void setup() {
   Serial.begin(9600); //listen on port 9600
   //tft.init(); // init serial connection
-  analogWrite(BACKLIGHT, 255); // make brightness max
-  pinMode(BACKLIGHT, OUTPUT); // set brightness
+  //analogWrite(BACKLIGHT, 255); // make brightness max
+  //pinMode(BACKLIGHT, OUTPUT); // set brightness
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL); //blinking led task
   //tft.setRotation(1);  // Set display rotation (optional)
   lv_init();
