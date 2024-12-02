@@ -47,15 +47,15 @@ void setup() {
   tft.setRotation(1);  // Set display rotation (optional)
 
   // Change background to black
-  tft.fillScreen(TFT_WHITE);
+  tft.fillScreen(TFT_BLACK);
   
   // Print some text
-  tft.setTextColor(TFT_BLACK);  // Set text color to black
+  tft.setTextColor(tft.color565(255,0,67));  // Set text color to black
   tft.setTextSize(2);  // Set text size
 
   //tft.println("HELLO WORLD");
   pinMode(BACKLIGHT, OUTPUT);
-  analogWrite(BACKLIGHT, 250);
+  analogWrite(BACKLIGHT, 255);
   //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
@@ -89,7 +89,7 @@ void loop() {
   
   if (y_set> 195){
     i++;
-    x_set +=190;
+    x_set +=170;
     y_set = 35;
   }
   tft.printf("i use arch btw\n");
