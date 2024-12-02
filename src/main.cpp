@@ -78,7 +78,7 @@ void setup()
 {
   tft.init();
   tft.setRotation(1);
-  tft.fillScreen(TFT_BLACK);
+  tft.fillScreen(TFT_WHITE);
   tft.setCursor(0,0,4);
   tft.setTextColor(TFT_WHITE);
   tft.println ("Hello World!");
