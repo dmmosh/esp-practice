@@ -93,7 +93,7 @@ void loop() {
   tft.printf(">be me\n>spend days coding esp32\n>finally works\n>happy");
   tft.setCursor(x_set, y_set);
   x_set += 30;
-  y_set+= 40;
+  y_set+= 50;
   delay(2000);
   //lv_timer_handler();
   // You can add more functionality here
