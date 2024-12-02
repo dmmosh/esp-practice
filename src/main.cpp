@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <TFT_eSPI.h>
+
 #include <lvgl.h>
 
 // #define LED 2 // led
@@ -56,8 +57,6 @@
 
 // void loop() {}
 
-
-
 /*Using LVGL with Arduino requires some extra steps:
  *Be sure to read the docs here: https://docs.lvgl.io/master/integration/framework/arduino.html  */
 
@@ -76,9 +75,12 @@
 //#include <demos/lv_demos.h>
 
 /*Set to your screen resolution and rotation*/
-#define TFT_HOR_RES   320
-#define TFT_VER_RES   240
+#define TFT_HOR_RES   100
+#define TFT_VER_RES   100
 #define TFT_ROTATION  LV_DISPLAY_ROTATION_0
+
+TFT_eSPI tft = TFT_eSPI();  // Create TFT object
+
 
 /*LVGL draw into this buffer, 1/10 screen size usually works well. The size is in bytes*/
 #define DRAW_BUF_SIZE (TFT_HOR_RES * TFT_VER_RES / 10 * (LV_COLOR_DEPTH / 8))
@@ -96,37 +98,20 @@ void my_print( lv_log_level_t level, const char * buf )
 /* LVGL calls it when a rendered image needs to copied to the display*/
 void my_disp_flush( lv_display_t *disp, const lv_area_t *area, uint8_t * px_map)
 {
-    /*Copy `px map` to the `area`*/
 
-    /*For example ("my_..." functions needs to be implemented by you)
-    uint32_t w = lv_area_get_width(area);
-    uint32_t h = lv_area_get_height(area);
+    uint16_t width = area->x2 - area->x1 + 1;
+    uint16_t height = area->y2 - area->y1 + 1;
 
-    my_set_window(area->x1, area->y1, w, h);
-    my_draw_bitmaps(px_map, w * h);
-     */
+    tft.startWrite();
+    tft.setAddrWindow(area->x1, area->y1, area->x2, area->y2);
+    tft.pushColor(px_map, width * height);
+    tft.endWrite();
 
     /*Call it to tell LVGL you are ready*/
     lv_display_flush_ready(disp);
 }
 
-/*Read the touchpad*/
-void my_touchpad_read( lv_indev_t * indev, lv_indev_data_t * data )
-{
-    /*For example  ("my_..." functions needs to be implemented by you)
-    int32_t x, y;
-    bool touched = my_get_touch( &x, &y );
 
-    if(!touched) {
-        data->state = LV_INDEV_STATE_RELEASED;
-    } else {
-        data->state = LV_INDEV_STATE_PRESSED;
-
-        data->point.x = x;
-        data->point.y = y;
-    }
-     */
-}
 
 /*use Arduinos millis() as tick source*/
 static uint32_t my_tick(void)
@@ -165,29 +150,9 @@ void setup()
     lv_display_set_buffers(disp, draw_buf, NULL, sizeof(draw_buf), LV_DISPLAY_RENDER_MODE_PARTIAL);
 #endif
 
-    /*Initialize the (dummy) input device driver*/
-    lv_indev_t * indev = lv_indev_create();
-    lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER); /*Touchpad should have POINTER type*/
-    lv_indev_set_read_cb(indev, my_touchpad_read);
 
-    /* Create a simple label
-     * ---------------------
-     lv_obj_t *label = lv_label_create( lv_screen_active() );
-     lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
-     lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
+     
 
-     * Try an example. See all the examples
-     *  - Online: https://docs.lvgl.io/master/examples.html
-     *  - Source codes: https://github.com/lvgl/lvgl/tree/master/examples
-     * ----------------------------------------------------------------
-
-     lv_example_btn_1();
-
-     * Or try out a demo. Don't forget to enable the demos in lv_conf.h. E.g. LV_USE_DEMO_WIDGETS
-     * -------------------------------------------------------------------------------------------
-
-     lv_demo_widgets();
-     */
 
     lv_obj_t *label = lv_label_create( lv_screen_active() );
     lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
@@ -201,3 +166,4 @@ void loop()
     lv_timer_handler(); /* let the GUI do its work */
     delay(5); /* let this time pass */
 }
+
