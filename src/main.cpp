@@ -94,7 +94,7 @@ void loop() {
   tft.printf("i use arch btw\n");
   tft.setCursor(x_set, y_set);
   //x_set += 10;
-  y_set+= 60;
+  y_set+= 10;
   delay(2000);
   //lv_timer_handler();
   // You can add more functionality here
