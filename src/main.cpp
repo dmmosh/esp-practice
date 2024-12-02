@@ -40,12 +40,15 @@ pio run; git-all; pio run --target upload && pio device monitor -b 115200
 void setup() {
   Serial.begin(115200); //listen on port 9600
   tft.init(); // init serial connection
+  tft.setRotation(1);
+  tft.fillScreen(TFT_BLACK);
   analogWrite(BACKLIGHT, 255); // make brightness max
   pinMode(BACKLIGHT, OUTPUT); // set brightness
 
   tft.fillScreen(TFT_WHITE);
   tft.setTextColor(TFT_BLACK);
   tft.setTextSize(2);
+  tft.setCursor(50,50);
   tft.println("HELLO WORLD");
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL); //blinking led task
   //tft.setRotation(1);  // Set display rotation (optional)
