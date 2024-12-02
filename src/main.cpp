@@ -1,9 +1,10 @@
 #include <Arduino.h>
-
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <TFT_eSPI.h>
+#include <lvgl.h>
 
 #define LED 2 // led
 
