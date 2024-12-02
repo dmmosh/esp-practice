@@ -57,6 +57,7 @@ void led(void* args){
  *Be sure to read the docs here: https://docs.lvgl.io/master/integration/framework/arduino.html  */
 
 #include <TFT_eSPI.h> // Include TFT_eSPI library
+#define BACKLIGHT 32
 
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 
@@ -66,22 +67,16 @@ void setup() {
   tft.setRotation(1);  // Set display rotation (optional)
 
   // Change background to black
-  tft.fillScreen(TFT_BLACK);
+  tft.fillScreen(TFT_WHITE);
   
   // Print some text
-  tft.setTextColor(TFT_WHITE);  // Set text color to white
+  tft.setTextColor(TFT_BLACK);  // Set text color to white
   tft.setTextSize(2);  // Set text size
   tft.setCursor(10, 10);  // Set cursor position
   tft.println("Background is Black");
-
-  delay(2000);  // Wait for 2 seconds
-
-  // Change background to blue
-  tft.fillScreen(TFT_BLUE);
-  tft.setTextColor(TFT_WHITE);  // Set text color to white
-  tft.setTextSize(2);  // Set text size
-  tft.setCursor(10, 10);  // Set cursor position
-  tft.println("Background is Blue");
+  pinMode(BACKLIGHT, OUTPUT);
+  analogWrite(BACKLIGHT, 250);
+  
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
 
 }
