@@ -40,7 +40,7 @@ pio run; git-all; pio run --target upload && pio device monitor -b 115200
 void setup() {
   Serial.begin(115200); //listen on port 9600
   tft.init();
-  tft.setRotation(2);  // Set display rotation (optional)
+  tft.setRotation(5);  // Set display rotation (optional)
 
   // Change background to black
   tft.fillScreen(TFT_WHITE);
@@ -50,7 +50,7 @@ void setup() {
   tft.setTextSize(2);  // Set text size
 
   tft.setCursor(10, 10);  // Set cursor position
-  tft.println("Background is Black");
+  tft.println("HELLO WORcjdskjk");
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 250);
   
