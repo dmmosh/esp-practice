@@ -11,20 +11,20 @@
 // #define Y_RES   100
 // #define TFT_ROTATION  LV_DISPLAY_ROTATION_0
 
-// void led(void* args){
-//   int i = 1000;
-//   while(1){
-//     digitalWrite(LED, HIGH);
-//     vTaskDelay(i/portTICK_PERIOD_MS);
-//     digitalWrite(LED, LOW);
-//     vTaskDelay(i/portTICK_PERIOD_MS);
-//     i= (int)((float)i /1.2);
-//     if(i == 0){
-//       i = 1000;
-//     }
-//     Serial.printf("%i\n", i);
-//   }
-// }
+void led(void* args){
+  int i = 1000;
+  while(1){
+    digitalWrite(LED, HIGH);
+    vTaskDelay(i/portTICK_PERIOD_MS);
+    digitalWrite(LED, LOW);
+    vTaskDelay(i/portTICK_PERIOD_MS);
+    i= (int)((float)i /1.2);
+    if(i == 0){
+      i = 1000;
+    }
+    Serial.printf("%i\n", i);
+  }
+}
 
 // /*
 // RUN AND COMPILE (with git-all)
@@ -85,6 +85,7 @@ void setup()
   tft.setCursor(0,0,4);
   tft.setTextColor(TFT_WHITE);
   tft.println ("Hello World!");
+  xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
 }
 
 void loop() 
