@@ -102,6 +102,10 @@ uint8_t newgrid[GRIDX][GRIDY];
 uint16_t genCount = 0;
 
 
+// Check the Moore neighbourhood
+int getNumberOfNeighbors(int x, int y) {
+  return grid[x - 1][y] + grid[x - 1][y - 1] + grid[x][y - 1] + grid[x + 1][y - 1] + grid[x + 1][y] + grid[x + 1][y + 1] + grid[x][y + 1] + grid[x - 1][y + 1];
+}
 
 //Draws the grid on the display
 void drawGrid(void) {
@@ -157,10 +161,6 @@ void computeCA() {
   }
 }
 
-// Check the Moore neighbourhood
-int getNumberOfNeighbors(int x, int y) {
-  return grid[x - 1][y] + grid[x - 1][y - 1] + grid[x][y - 1] + grid[x + 1][y - 1] + grid[x + 1][y] + grid[x + 1][y + 1] + grid[x][y + 1] + grid[x - 1][y + 1];
-}
 
 /*
    The MIT License (MIT)
