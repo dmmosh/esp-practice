@@ -62,20 +62,26 @@ TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 
 void setup() {
   Serial.begin(9600);
+  tft.init();
+  tft.setRotation(1);  // Set display rotation (optional)
 
-  // Initialize the TFT display
-  tft.begin();
-  tft.setRotation(1);  // Set orientation if needed
-  tft.fillScreen(TFT_BLACK); // Clear the screen
+  // Change background to black
+  tft.fillScreen(TFT_BLACK);
+  
+  // Print some text
+  tft.setTextColor(TFT_WHITE);  // Set text color to white
+  tft.setTextSize(2);  // Set text size
+  tft.setCursor(10, 10);  // Set cursor position
+  tft.println("Background is Black");
 
-  // Set text color and size
-  tft.fillScreen(TFT_WHITE);
-  tft.setTextColor(TFT_BLACK);
-  tft.setTextSize(2);
+  delay(2000);  // Wait for 2 seconds
 
-  // Display text
-  tft.setCursor(10, 10);  // Set text cursor position
-  tft.println("Hello, World!");
+  // Change background to blue
+  tft.fillScreen(TFT_BLUE);
+  tft.setTextColor(TFT_WHITE);  // Set text color to white
+  tft.setTextSize(2);  // Set text size
+  tft.setCursor(10, 10);  // Set cursor position
+  tft.println("Background is Blue");
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
 
 }
