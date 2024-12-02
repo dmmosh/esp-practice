@@ -73,7 +73,6 @@ void setup() {
   tft.setTextSize(1);
 
   // Display text
-  tft.setCursor(20,20);
   tft.println("Hello, World!");
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
 
