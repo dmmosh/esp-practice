@@ -37,7 +37,7 @@ unsigned int lastTick = millis();
 
 void setup() {
   Serial.begin(9600); //listen on port 9600
-  tft.init(); // init serial connection
+  //tft.init(); // init serial connection
   analogWrite(BACKLIGHT, 255); // make brightness max
   pinMode(BACKLIGHT, OUTPUT); // set brightness
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL); //blinking led task
@@ -52,10 +52,9 @@ void setup() {
   lv_obj_t *label = lv_label_create( CURR );
   lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
   lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
-  lv_obj_set_style_bg_color(CURR, LV_COLOR_MAKE(100,100,100),0);
 
   Serial.println( "Setup done" );
-    
+
 
 }
 
