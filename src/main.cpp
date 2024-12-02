@@ -46,8 +46,9 @@ void setup() {
   tft.fillScreen(TFT_WHITE);
   
   // Print some text
-  tft.setTextColor(TFT_BLACK);  // Set text color to white
+  tft.setTextColor(TFT_BLACK);  // Set text color to black
   tft.setTextSize(2);  // Set text size
+
   tft.setCursor(10, 10);  // Set cursor position
   tft.println("Background is Black");
   pinMode(BACKLIGHT, OUTPUT);
