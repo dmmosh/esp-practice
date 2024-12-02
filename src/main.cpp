@@ -53,7 +53,7 @@ void setup() {
   tft.println("HELLO WORLD");
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 250);
-  tft.fillRect(1,36, 320,170, TFT_BLACK);
+  //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
   //tft.setRotation(1);  // Set display rotation (optional)
@@ -73,9 +73,27 @@ void setup() {
 
 }
 
-void loop() {
-  
+unsigned int x_set = 5; 
+unsigned int y_set = 35; 
+unsigned int i = 1;
 
+void loop() {
+  if (x_set > 320){
+    i++;
+    x_set = 5*i;
+  }
+  if (5*i > 320){
+    i = 2;
+  }
+
+  if (y_set> 205){
+    y_set = 35;
+  }
+  tft.printf(">be me\n>spend days coding esp32\n>finally works\n>happy");
+  tft.setCursor(x_set, y_set);
+  x_set += 30;
+  y_set+= 40;
+  delay(2000);
   //lv_timer_handler();
   // You can add more functionality here
 }
