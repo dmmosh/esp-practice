@@ -79,16 +79,17 @@ void setup() {
 
 
 void loop() {
-  if (x_set > 320){
-    i++;
-    x_set = 5*i;
+  if (i>2){
+    tft.fillScreen(TFT_BLACK);
+    x_set = 5;
+    y_set=35;
+    i=2;
+    tft.setCursor(x_set, y_set);
   }
-  if (5*i > 320){
-    i = 2;
-  }
-
+  
   if (y_set> 195){
-    x_set +=150;
+    i++;
+    x_set +=190;
     y_set = 35;
   }
   tft.printf("i use arch btw\n");
