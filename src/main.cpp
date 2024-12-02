@@ -6,10 +6,7 @@
 #include <TFT_eSPI.h>
 #include <lvgl.h>
 
-// #define LED 2 // led
-// #define X_RES   100
-// #define Y_RES   100
-// #define TFT_ROTATION  LV_DISPLAY_ROTATION_0
+#define LED 2 // led
 
 void led(void* args){
   int i = 1000;
