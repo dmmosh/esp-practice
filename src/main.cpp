@@ -49,7 +49,7 @@ void setup() {
   tft.setTextColor(TFT_BLACK);  // Set text color to black
   tft.setTextSize(2);  // Set text size
 
-  tft.setCursor(10, 10);  // Set cursor position
+  tft.setCursor(50, 50);  // Set cursor position
   tft.println("HELLO WORcjdskjk");
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 250);
