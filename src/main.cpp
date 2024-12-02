@@ -3,13 +3,18 @@
 #include "freertos/task.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <TFT_eSPI.h>
 #include <lvgl.h>
+#include <TFT_eSPI.h>
 
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
 #define X_RES 100
 #define Y_RED 100
+#define LV_USE_TFT_ESPI 1
+LV_TFT_ESPI_H
+
+#define DRAW_BUF_SIZE (X_RES * Y_RED / 10 * (LV_COLOR_DEPTH / 8))
+uint32_t draw_buf[DRAW_BUF_SIZE / 4];
 
 
 void led(void* args){
@@ -30,10 +35,6 @@ void led(void* args){
 
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 
-static uint32_t my_tick(void)
-{
-    return millis();
-}
 
 void setup() {
   Serial.begin(9600); //listen on port 9600
@@ -43,15 +44,16 @@ void setup() {
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL); //blinking led task
   //tft.setRotation(1);  // Set display rotation (optional)
   lv_init();
-  lv_tick_set_cb(my_tick);
+  //lv_tick_set_cb(my_tick);
 
-  lv_display_t* disp = lv_display_create(X_RES, Y_RED);
+  lv_display_t* disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
   lv_display_set_rotation(disp, LV_DISP_ROTATION_90);
-  lv_obj_t *label = lv_label_create( lv_screen_active() );
-    lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
-    lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
 
-    Serial.println( "Setup done" );
+
+  lv_obj_t *label = lv_label_create( lv_screen_active() );
+  lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
+  lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
+  Serial.println( "Setup done" );
   
 
 }
