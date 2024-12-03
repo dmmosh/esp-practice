@@ -34,24 +34,6 @@ void led(void* args){
   }
 }
 
-void vTaskMemoryUsage(void *pvParameters)
-{
-    while(1){
-    // Get the task handle
-    TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
-    
-    // Get the high-water mark of the task's stack (bytes left)
-    UBaseType_t uxHighWaterMark = uxTaskGetStackHighWaterMark(xTaskHandle);
-    
-    // Optionally, print the stack size (this is the total stack size)
-    UBaseType_t uxTaskStackSize = configMINIMAL_STACK_SIZE; // Or your stack size
-    
-    debug("mem: %i|%i", uxHighWaterMark, uxTaskStackSize);
-    vTaskDelay(1000/portTICK_PERIOD_MS);
-    }
-
-
-}
 
 unsigned int x_set = 5; 
 unsigned int y_set = 35; 
@@ -76,6 +58,24 @@ void debug(const char* format, Args... args){
   }
 }
 
+void vTaskMemoryUsage(void *pvParameters)
+{
+    while(1){
+    // Get the task handle
+    TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
+    
+    // Get the high-water mark of the task's stack (bytes left)
+    UBaseType_t uxHighWaterMark = uxTaskGetStackHighWaterMark(xTaskHandle);
+    
+    // Optionally, print the stack size (this is the total stack size)
+    UBaseType_t uxTaskStackSize = configMINIMAL_STACK_SIZE; // Or your stack size
+    
+    debug("mem: %i|%i", uxHighWaterMark, uxTaskStackSize);
+    vTaskDelay(1000/portTICK_PERIOD_MS);
+    }
+
+
+}
 
 /*
 pio run; git-all; pio run --target upload && pio device monitor -b 115200
@@ -96,6 +96,7 @@ void setup() {
   tft.setTextSize(2);  // Set text size
   //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
 
+  tft.setCursor(x_set, y_set);  // Set cursor position
 
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 255);
@@ -106,7 +107,6 @@ void setup() {
   
  
 
-  //tft.setCursor(x_set, y_set);  // Set cursor position
 }
 
 
