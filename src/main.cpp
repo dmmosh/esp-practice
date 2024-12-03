@@ -95,7 +95,7 @@ void setup() {
   analogWrite(BACKLIGHT, 255);
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
-  //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
+  xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
   
   lv_init();
   // malloc_cap_internal : internal flash sotrage
@@ -112,8 +112,8 @@ void setup() {
   lv_obj_t *d = debug_make();
 
   char* test = "fdjshckd";
-  debug(d,"those who know..%d\t%s",345,test);
-  debug(d,"hello worldd%d", 453);
+  //debug(d,"those who know..%d\t%s",345,test);
+  //debug(d,"hello worldd%d", 453);
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
