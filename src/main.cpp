@@ -45,14 +45,14 @@ unsigned int i = 1;
 
 void setup() {
   Serial.begin(115200); //listen on port 9600
-  tft.init();
-  tft.setRotation(1);  // Set display rotation (optional)
-
-  // Change background to black
-  tft.fillScreen(TFT_BLACK);
-  // Print some text
-  tft.setTextColor(TFT_RED);  // Set text color to black
-  tft.setTextSize(2);  // Set text size
+  //tft.init();
+  //tft.setRotation(1);  // Set display rotation (optional)
+//
+  //// Change background to black
+  //tft.fillScreen(TFT_BLACK);
+  //// Print some text
+  //tft.setTextColor(TFT_RED);  // Set text color to black
+  //tft.setTextSize(2);  // Set text size
 
   //tft.println("HELLO WORLD");
   pinMode(BACKLIGHT, OUTPUT);
@@ -64,6 +64,7 @@ void setup() {
   lv_init();
   draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
   lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
+  lv_disp_set_rotation(disp,LV_DISPLAY_ROTATION_90);
 
   lv_obj_t * label = lv_label_create(CURR);
   lv_label_set_text(label, "HELLO WORLD");
