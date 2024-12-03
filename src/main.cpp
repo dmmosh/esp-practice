@@ -40,7 +40,16 @@ unsigned int y_set = 35;
 unsigned int i = 1;
 template<typename ...Args>
 void debug(const char* format, Args... args){
-  if (y_set> 195){ // to go col 2 
+
+  if (i>2){ // reset
+    tft.fillScreen(TFT_BLACK);
+    x_set = 5;
+    y_set=35;
+    i=1;
+    tft.setCursor(x_set, y_set);
+  }
+  
+  if (y_set> 170){ // to go col 2 
     i++;
     x_set +=170;
     y_set = 35;
@@ -51,13 +60,6 @@ void debug(const char* format, Args... args){
   y_set+= 20;
   tft.setCursor(x_set, y_set);
   //x_set += 10;
-  if (i>2){ // reset
-    tft.fillScreen(TFT_BLACK);
-    x_set = 5;
-    y_set=35;
-    i=1;
-    tft.setCursor(x_set, y_set);
-  }
 }
 
 void vTaskMemoryUsage(void *pvParameters)
