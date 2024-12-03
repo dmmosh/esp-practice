@@ -14,6 +14,7 @@
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
+unsigned int tick_last = millis();
 
 
 
@@ -38,10 +39,6 @@ void led(void* args){
 /*
 pio run; git-all; pio run --target upload && pio device monitor -b 115200
 */
-
-unsigned int x_set = 5; 
-unsigned int y_set = 35; 
-unsigned int i = 1;
 
 void setup() {
   Serial.begin(115200); //listen on port 115200
@@ -77,7 +74,9 @@ void setup() {
 
 
 void loop() {
-  delay(lv_timer_handler());
+  lv_tick_inc(millis()- tick_last);
+  tick_last= millis();
+  lv_timer_handler();
   // if (y_set> 195){
   //   i++;
   //   x_set +=170;
