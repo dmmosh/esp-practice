@@ -65,7 +65,7 @@ void setup() {
   lv_obj_t * label = lv_label_create(CURR);
   lv_label_set_text(label, "HELLO WORLD");
   lv_obj_set_style_text_color(label,lv_color_black(), LV_PART_MAIN|LV_STATE_DEFAULT);
-  lv_obj_align(label, LV_ALIGN_CENTER, 0,0);
+  lv_obj_align(label, LV_ALIGN_TOP_LEFT, 10,40);
 
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
@@ -73,8 +73,7 @@ void setup() {
 
 
 void loop() {
-  lv_timer_handler();
-  delay(1000);
+  delay(lv_timer_handler());
   // if (y_set> 195){
   //   i++;
   //   x_set +=170;
