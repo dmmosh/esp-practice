@@ -11,7 +11,7 @@
 #define X_RES 240 // y (rotated)
 #define Y_RES 320 // x (rotated)
 #define VERTICAL_OFFSET 35
-#define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
+#define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8)) // refresh display buffer
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
 
@@ -40,7 +40,7 @@ void debug(lv_obj_t* screen, const char* format, Args... args){
   static bool first_time = true;
   if (first_time){
     lv_label_set_text(print_label,"test");
-    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,5);
+    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,5+VERTICAL_OFFSET);
     first_time = false;
   }
 
