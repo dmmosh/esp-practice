@@ -42,8 +42,8 @@ void debug(const char* format, Args... args){
   
 
   if (first_time){
-    lv_label_set_text(print_label, "");
-    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,5+VERTICAL_OFFSET-10);
+    lv_label_set_text(print_label, " ");
+    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,5+VERTICAL_OFFSET-15);
     first_time = false;
   }
 
