@@ -8,8 +8,8 @@
 
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
-#define X_RES 240
-#define Y_RES 320
+#define X_RES 240 // y (rotated)
+#define Y_RES 320 // x (rotated)
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
@@ -29,6 +29,21 @@ void led(void* args){
     }
     Serial.printf("%i\n", i);
   }
+}
+
+
+// DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
+template <typename... Args>
+void debug(void* format, Args... args){
+  static lv_disp_t *print_label = lv_label_create(lv_scr_act());
+  static int16_t y_offset = 0;
+  
+  char[100] buffer = "> ";
+  sprintf(buffer+2, format, args...);
+
+
+  lv_obj_align(print_label, LV_ALIGN_TOP_LEFT,0,y_offset);
+  y_offset+=10;
 }
 
 
