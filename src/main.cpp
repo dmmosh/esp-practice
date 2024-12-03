@@ -56,8 +56,7 @@ void debug(const char* format, Args... args){
   char buffer[100];
   sprintf(buffer, format, args...);
 
-  lv_label_set_text_fmt(print_label, "%s\n"
-                                     "> %s", lv_label_get_text(print_label), buffer);
+  lv_label_set_text_fmt(print_label, "%s%s", lv_label_get_text(print_label), buffer);
 
   line_num++;
 
@@ -96,7 +95,7 @@ void setup() {
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
   debug("those who know..%d\t%s",345,"dschkds");
-  debug("hello worldd");
+  debug("\nhello worldd");
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
