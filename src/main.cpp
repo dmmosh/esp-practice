@@ -81,7 +81,7 @@ void setup() {
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 255);
   
-  xTaskCreate(led, "blink led", 200, NULL, 1, NULL);
+  xTaskCreate(led, "blink led", 1048, NULL, 1, NULL);
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
   
  
