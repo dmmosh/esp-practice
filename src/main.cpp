@@ -72,11 +72,9 @@ void setup() {
 }
 
 
-unsigned int tick_last = millis();
 void loop() {
-  lv_tick_inc(millis()- tick_last);
-  tick_last= millis();
   lv_timer_handler();
+  delay(1000);
   // if (y_set> 195){
   //   i++;
   //   x_set +=170;
