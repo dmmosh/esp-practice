@@ -38,7 +38,7 @@ void debug(void* format, Args... args){
   static lv_disp_t *print_label = lv_label_create(lv_scr_act());
   static int16_t y_offset = 0;
   
-  char[100] buffer = "> ";
+  char buffer[100] = "> ";
   sprintf(buffer+2, format, args...);
   lv_label_set_text(print_label, buffer);
 
