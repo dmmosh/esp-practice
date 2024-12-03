@@ -54,7 +54,6 @@ void debug(const char* format, Args... args){
 
   lv_label_set_text_fmt(print_label, "%s%s", lv_label_get_text(print_label), buffer);
 
-  line_num++;
 
 }
 
