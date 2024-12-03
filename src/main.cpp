@@ -34,6 +34,25 @@ void led(void* args){
   }
 }
 
+void vTaskMemoryUsage(void *pvParameters)
+{
+    while(1){
+    // Get the task handle
+    TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
+    
+    // Get the high-water mark of the task's stack (bytes left)
+    UBaseType_t uxHighWaterMark = uxTaskGetStackHighWaterMark(xTaskHandle);
+    
+    // Optionally, print the stack size (this is the total stack size)
+    UBaseType_t uxTaskStackSize = configMINIMAL_STACK_SIZE; // Or your stack size
+    
+    debug("mem: %i|%i", uxHighWaterMark, uxTaskStackSize);
+    vTaskDelay(1000/portTICK_PERIOD_MS);
+    }
+
+
+}
+
 unsigned int x_set = 5; 
 unsigned int y_set = 35; 
 unsigned int i = 1;
@@ -82,6 +101,7 @@ void setup() {
   analogWrite(BACKLIGHT, 255);
   
   xTaskCreate(led, "blink led", 1048, NULL, 1, NULL);
+  xTaskCreate(vTaskMemoryUsage, "task monitor", 2048, NULL, 1, NULL);
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
   
  
@@ -91,7 +111,6 @@ void setup() {
 
 
 void loop() {
-  debug("hello%d",43243);
 
   delay(1000);
   //lv_timer_handler();
