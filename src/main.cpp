@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <lvgl.h>
 #include <TFT_eSPI.h>
+#include "BluetoothSerial.h"
 
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
@@ -13,24 +14,10 @@
 #define VERTICAL_OFFSET 35
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8)) // refresh display buffer
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
+BluetoothSerial SerialBT;
 void* draw_buf;
 
 
-
-void led(void* args){
-  int i = 1000; 
-  while(1){
-    digitalWrite(LED, HIGH);
-    vTaskDelay(i/portTICK_PERIOD_MS);
-    digitalWrite(LED, LOW);
-    vTaskDelay(i/portTICK_PERIOD_MS);
-    i= (int)((float)i /1.2);
-    if(i == 0){
-      i = 1000;
-    }
-    Serial.printf("%i\n", i);
-  }
-}
 
 
 // DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
@@ -52,31 +39,63 @@ lv_obj_t* debug_make(){
 }
 
 
+
+
+
+void led(void* args){
+  int i = 1000; 
+  while(1){
+    digitalWrite(LED, HIGH);
+    vTaskDelay(i/portTICK_PERIOD_MS);
+    digitalWrite(LED, LOW);
+    vTaskDelay(i/portTICK_PERIOD_MS);
+    i= (int)((float)i /1.2);
+    if(i == 0){
+      i = 1000;
+    }
+    //Serial.printf("%i\n", i);
+  }
+}
+
+void print_test(void* args){
+  lv_obj_t *d = debug_make();
+  while(1){
+    debug(d, "HELLO THERE%d\t%d", 32, 532);
+    vTaskDelay(1000/portTICK_RATE_MS);
+  }
+}
+
+
 /*
 pio run; git-all; pio run --target upload && pio device monitor -b 115200
 */
 
 void setup() {
   Serial.begin(115200); //listen on port 115200
-  //tft.init();
-  //tft.setRotation(1);  // Set display rotation (optional)
 
-  // Change background to black
-  //tft.fillScreen(TFT_BLACK);
-  //// Print some text
-  //tft.setTextColor(TFT_RED);  // Set text color to black
-  //tft.setTextSize(2);  // Set text size
+  SerialBT.begin("ESP32test");
 
-  //tft.println("HELLO WORLD");
+  // tft gui basic 
+  /*
+  tft.init();
+  tft.setRotation(1);  // Set display rotation (optional)
+
+  Change background to black
+  tft.fillScreen(TFT_BLACK);
+  // Print some text
+  tft.setTextColor(TFT_RED);  // Set text color to black
+  tft.setTextSize(2);  // Set text size
+  //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
+
+  tft.println("HELLO WORLD");
+
+  */
+
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 255);
-  //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
-<<<<<<< HEAD
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
-=======
->>>>>>> parent of 3006d6b (nothing of note)
   
   lv_init();
   // malloc_cap_internal : internal flash sotrage
@@ -101,25 +120,8 @@ void setup() {
 
 
 void loop() {
+  
   lv_timer_handler();
   delay(5);
-  // if (y_set> 195){
-  //   i++;
-  //   x_set +=170;
-  //   y_set = 35;
-  // }
-  // tft.printf("i use arch btw\n");
-  // tft.setCursor(x_set, y_set);
-  // //x_set += 10;
-  // y_set+= 15;
-  // if (i>2){
-  //   tft.fillScreen(TFT_BLACK);
-  //   x_set = 5;
-  //   y_set=35;
-  //   i=1;
-  //   tft.setCursor(x_set, y_set);
-  // }
-  // delay(1200);
-  //lv_timer_handler();
-  // You can add more functionality here
+  
 }
