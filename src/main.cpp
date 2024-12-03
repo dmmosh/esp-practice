@@ -95,7 +95,7 @@ void setup() {
   analogWrite(BACKLIGHT, 255);
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
-  xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
+  //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
   
   lv_init();
   draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
