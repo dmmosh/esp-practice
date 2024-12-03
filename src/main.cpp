@@ -14,7 +14,6 @@
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
-unsigned int tick_last = millis();
 
 
 
@@ -66,13 +65,14 @@ void setup() {
   lv_obj_t * label = lv_label_create(CURR);
   lv_label_set_text(label, "HELLO WORLD");
   lv_obj_set_style_text_color(label,lv_color_black(), LV_PART_MAIN|LV_STATE_DEFAULT);
-  lv_obj_align(label, LV_ALIGN_TOP_LEFT, 10,40);
+  lv_obj_align(label, LV_ALIGN_CENTER, 0,0);
 
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
 
 
+unsigned int tick_last = millis();
 void loop() {
   lv_tick_inc(millis()- tick_last);
   tick_last= millis();
