@@ -34,21 +34,21 @@ void led(void* args){
 
 
 // DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
-lv_obj_t *print_label;
-bool first_time = true;
 template <typename... Args>
-void debug(const char* format, Args... args){
+void debug(lv_obj_t* curr, const char* format, Args... args){
+  static lv_obj_t *print_label = lv_label_create(curr);
+  static bool first_time = true;
   //static uint16_t font_height = lv_obj_get_style_text_font(print_label,LV_PART_MAIN)->line_height; // font height
   
   if (first_time){
-    *print_label = lv_label_create(lv_scr_act());
+    lv_obj_set_size(print_label, Y_RES,X_RES);
     lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,50+VERTICAL_OFFSET);
     first_time = false;
   }
 
   char buffer[100];
   sprintf(buffer, format, args...);
-  lv_label_set_text_fmt(print_label,"> %s", buffer);
+  lv_label_set_text_fmt(print_label,"> %s"buffer);
 
 
 }
@@ -85,9 +85,8 @@ void setup() {
   lv_label_set_text(hello, "HELLO\n THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
-  lv_label_set_text(hello, "whooooo");
-  debug("those who know..%d\t%s",345,"dschkds");
-  debug("hello worldd%d", 453);
+  debug(lv_scr_act(),"those who know..%d\t%s",345,"dschkds");
+  debug(lv_scr_act(),"hello worldd%d", 453);
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
