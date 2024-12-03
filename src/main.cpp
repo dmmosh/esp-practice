@@ -15,6 +15,8 @@
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
 
+
+
 void led(void* args){
   int i = 1000; 
   while(1){
@@ -48,7 +50,6 @@ void setup() {
 
   // Change background to black
   tft.fillScreen(TFT_BLACK);
-  
   // Print some text
   tft.setTextColor(TFT_RED);  // Set text color to black
   tft.setTextSize(2);  // Set text size
@@ -59,44 +60,39 @@ void setup() {
   //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
-  //tft.setRotation(1);  // Set display rotation (optional)
-  // lv_init();
-  // //lv_tick_set_cb(my_tick);
+  
+  lv_init();
+  draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
+  lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
 
-  // draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
-  // lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
-
-
-  // lv_obj_t *label = lv_label_create( CURR );
-  // lv_label_set_text( label, "Hello Arduino, I'm LVGL!" );
-  // lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
-
-  // Serial.println( "Setup done" );
+  lv_obj_t * label = lv_label_create(CURR);
+  lv_label_set_text(label, "HELLO WORLD");
+  lv_obj_align(label, LV_ALIGN_CENTER, 0,0);
 
 
-  tft.setCursor(x_set, y_set);  // Set cursor position
+  //tft.setCursor(x_set, y_set);  // Set cursor position
 }
 
 
 void loop() {
   
-  if (y_set> 195){
-    i++;
-    x_set +=170;
-    y_set = 35;
-  }
-  tft.printf("i use arch btw\n");
-  tft.setCursor(x_set, y_set);
-  //x_set += 10;
-  y_set+= 15;
-  if (i>2){
-    tft.fillScreen(TFT_BLACK);
-    x_set = 5;
-    y_set=35;
-    i=1;
-    tft.setCursor(x_set, y_set);
-  }
-  delay(1200);
+  // if (y_set> 195){
+  //   i++;
+  //   x_set +=170;
+  //   y_set = 35;
+  // }
+  // tft.printf("i use arch btw\n");
+  // tft.setCursor(x_set, y_set);
+  // //x_set += 10;
+  // y_set+= 15;
+  // if (i>2){
+  //   tft.fillScreen(TFT_BLACK);
+  //   x_set = 5;
+  //   y_set=35;
+  //   i=1;
+  //   tft.setCursor(x_set, y_set);
+  // }
+  // delay(1200);
   //lv_timer_handler();
   // You can add more functionality here
 }
