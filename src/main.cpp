@@ -41,6 +41,12 @@ unsigned int i = 1;
 template<typename ...Args>
 void debug(const char* format, Args... args){
 
+  if (y_set> 190){ // to go col 2 
+    i++;
+    x_set +=170;
+    y_set = 35;
+  }
+  
   if (i>2){ // reset
     tft.fillScreen(TFT_BLACK);
     x_set = 5;
@@ -49,11 +55,6 @@ void debug(const char* format, Args... args){
     //tft.setCursor(x_set, y_set);
   }
 
-  if (y_set> 190){ // to go col 2 
-    i++;
-    x_set +=170;
-    y_set = 35;
-  }
   tft.setCursor(x_set, y_set);
 
   tft.printf(format, args...);
