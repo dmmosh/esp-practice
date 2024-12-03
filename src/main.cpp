@@ -95,7 +95,7 @@ void setup() {
   analogWrite(BACKLIGHT, 255);
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
-  xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
+  //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
   
   lv_init();
   // malloc_cap_internal : internal flash sotrage
