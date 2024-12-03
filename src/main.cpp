@@ -43,7 +43,7 @@ void debug(const char* format, Args... args){
   
 
   if (font_height*line_num > X_RES+VERTICAL_OFFSET){
-    lv_label_set_text(print_label, " sdcndjsknkj\n");
+    lv_label_set_text(print_label, " \n");
     line_num=0;
   }
 
@@ -55,9 +55,8 @@ void debug(const char* format, Args... args){
 
   char buffer[100];
   sprintf(buffer, format, args...);
-  char* curr = lv_label_get_text(print_label);
 
-  lv_label_set_text_fmt(print_label, "%s%s", curr, buffer);
+  lv_label_set_text(print_label, buffer);
 
   line_num++;
 
