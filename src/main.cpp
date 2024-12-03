@@ -39,7 +39,7 @@ void debug(lv_obj_t* debug_obj, const char* format, Args... args){
   static int 
 
   char buffer[150];
-  sprintf(buffer, format, args...);
+  sprintf((char*)buffer, format, args...);
   lv_label_set_text_fmt(debug_obj,"%s\n> %s",lv_label_get_text(debug_obj), buffer);
 
 
