@@ -55,8 +55,8 @@ void setup() {
   //tft.setTextSize(2);  // Set text size
 
   //tft.println("HELLO WORLD");
-  pinMode(BACKLIGHT, OUTPUT);
-  analogWrite(BACKLIGHT, 255);
+  //pinMode(BACKLIGHT, OUTPUT);
+  //analogWrite(BACKLIGHT, 255);
   //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
   
   xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
