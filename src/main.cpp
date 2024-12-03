@@ -93,8 +93,8 @@ void setup() {
   lv_label_set_text(hello, "HELLO\n THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
-  debug("\nthose who know..%d\t%s",345,"dschkds");
-  debug("\nhello worldd");
+  debug("those who know..%d\t%s",345,"dschkds");
+  //debug("\nhello worldd");
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
