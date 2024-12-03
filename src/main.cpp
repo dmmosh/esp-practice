@@ -39,11 +39,13 @@ void debug(const char* format, Args... args){
   static lv_obj_t *print_label = lv_label_create(lv_scr_act());
   static bool first_time = true;
   static uint16_t font_height = lv_obj_get_style_text_font(print_label,LV_PART_MAIN)->line_height; // font height
-  static uint16_t line_num = ~0; // init line num to max value, then resets to 0 on the first run
+  static uint16_t line_num = 50; // init line num to max value, then resets to 0 on the first run
   
 
   if (font_height*line_num > X_RES+VERTICAL_OFFSET){
+    lv_label_set_text(print_label,"jdfkshjkj");
     line_num=0;
+
   }
 
   if (first_time){
