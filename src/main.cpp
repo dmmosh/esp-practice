@@ -38,21 +38,14 @@ void debug(const char* format, Args... args){
   static lv_obj_t *print_label = lv_label_create(lv_scr_act());
   static bool first_time = true;
   if (first_time){
-    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,5);
     lv_label_set_text(print_label,"test");
+    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,5);
     first_time = false;
   }
 
 
 }
 
-
-void debug_loop(void* args){
-  while(1){
-    debug("those who know..%d\t%s",345,"dschkds");
-    vTaskDelay(1000/portTICK_PERIOD_MS);
-  }
-}
 
 /*
 pio run; git-all; pio run --target upload && pio device monitor -b 115200
@@ -85,7 +78,7 @@ void setup() {
   lv_label_set_text(hello, "HELLO THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
-  xTaskCreate(debug_loop, "loop debug", 10000,NULL, 1, NULL);
+  debug("those who know..%d\t%s",345,"dschkds");
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
