@@ -34,8 +34,8 @@ void led(void* args){
 
 // DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
 template <typename... Args>
-void debug(const char* format, Args... args){
-  static lv_obj_t *print_label = lv_label_create(lv_scr_act());
+void debug(const lv_obj_t* screen, const char* format, Args... args){
+  static lv_obj_t *print_label = lv_label_create(screen);
   static bool first_time = true;
   if (first_time){
     lv_label_set_text(print_label,"test");
@@ -78,7 +78,7 @@ void setup() {
   lv_label_set_text(hello, "HELLO THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
-  debug("those who know..%d\t%s",345,"dschkds");
+  debug(lv_scr_act(), "those who know..%d\t%s",345,"dschkds");
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
