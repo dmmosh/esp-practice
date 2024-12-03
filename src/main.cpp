@@ -70,7 +70,7 @@ void vTaskMemoryUsage(void *pvParameters)
     // Optionally, print the stack size (this is the total stack size)
     UBaseType_t uxTaskStackSize = configMINIMAL_STACK_SIZE; // Or your stack size
     
-    debug("mem: %i|%i", uxHighWaterMark, uxTaskStackSize);
+    debug("mem: %i | %i", uxHighWaterMark, uxTaskStackSize);
     vTaskDelay(1000/portTICK_PERIOD_MS);
     }
 
