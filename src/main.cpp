@@ -73,7 +73,7 @@ void setup() {
 
 
 void loop() {
-  delay(lv_timer_handler());
+  //delay(lv_timer_handler());
   // if (y_set> 195){
   //   i++;
   //   x_set +=170;
