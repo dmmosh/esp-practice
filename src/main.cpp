@@ -111,7 +111,7 @@ void setup() {
 
 
 void loop() {
-
+  Serial.write(SerialBT.read());
   delay(1000);
   //lv_timer_handler();
 }
