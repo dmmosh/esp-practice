@@ -40,10 +40,15 @@ void debug(void* format, Args... args){
   
   char[100] buffer = "> ";
   sprintf(buffer+2, format, args...);
-
+  lv_label_set_text(print_label, buffer);
 
   lv_obj_align(print_label, LV_ALIGN_TOP_LEFT,0,y_offset);
   y_offset+=10;
+
+  if (y_offset>240){
+    y_offset=0;
+    lv_scr_load(NULL);
+  }
 }
 
 
