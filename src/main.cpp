@@ -111,7 +111,7 @@ void setup() {
 
 
 char buffer[101];
-int i = 0;
+uint8_t chr = 0;
 void loop() {
 
   // // check for message from serial monitor
@@ -130,17 +130,17 @@ void loop() {
 
     switch(curr){
       case '\n':
-        buffer[i] = '\0';
+        buffer[chr] = '\0';
         debug(buffer);
-        i=0;
+        chr=0;
       break;
       default:
-        buffer[i] = curr;
+        buffer[chr] = curr;
     }
     
 
-    i+=1;
-    if(i>100) i = 0;
+    chr+=1;
+    if(chr>100) chr = 0;
   }
   delay(5);
   //lv_timer_handler();
