@@ -48,7 +48,7 @@ void debug(const char* format, Args... args){
   }
 
   if (first_time){
-    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,5+VERTICAL_OFFSET-font_height);
+    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,VERTICAL_OFFSET-font_height);
     first_time = false;
   }
 
@@ -56,7 +56,7 @@ void debug(const char* format, Args... args){
   sprintf(buffer, format, args...);
 
   lv_label_set_text_fmt(print_label, "%s\n> %s", lv_label_get_text(print_label), buffer);
-  
+
   line_num++;
 
 }
