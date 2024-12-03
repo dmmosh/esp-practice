@@ -85,8 +85,8 @@ void setup() {
   lv_label_set_text(hello, "HELLO THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
-  const char* hello = "jndknclkd";
-  debug("those who know..%d\t%s",345,hello);
+  const char* hi = "jndknclkd";
+  debug("those who know..%d\t%s",345,hi);
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
