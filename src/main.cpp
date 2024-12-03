@@ -102,7 +102,7 @@ void setup() {
   analogWrite(BACKLIGHT, 255);
   
   xTaskCreate(led, "blink led", 1048, NULL, 1, NULL);
-  xTaskCreate(vTaskMemoryUsage, "task monitor", 2048, NULL, 1, NULL);
+  //xTaskCreate(vTaskMemoryUsage, "task monitor", 2048, NULL, 1, NULL);
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
   
  
@@ -111,8 +111,17 @@ void setup() {
 
 
 void loop() {
-  Serial.write(SerialBT.read());
-  delay(1000);
+
+  // check for message from serial monitor
+  if (Serial.available()){
+    SerialBT.write(Serial.read());
+  }
+
+  //check for message from a paired bluetooth
+  if (SerialBT.available()){
+    Serial.write(SerialBT.read());
+  }
+  delay(5);
   //lv_timer_handler();
 }
 
