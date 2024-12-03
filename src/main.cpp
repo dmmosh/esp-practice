@@ -44,7 +44,7 @@ void debug(const char* format, Args... args){
     x_set +=170;
     y_set = 35;
   }
-  tft.printf(format, args);
+  tft.printf(format, args...);
   tft.setCursor(x_set, y_set);
   //x_set += 10;
   y_set+= 15;
