@@ -34,7 +34,7 @@ void led(void* args){
 
 // DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
 template <typename... Args>
-void debug(const lv_obj_t* screen, const char* format, Args... args){
+void debug(lv_obj_t* screen, const char* format, Args... args){
   static lv_obj_t *print_label = lv_label_create(screen);
   static bool first_time = true;
   if (first_time){
