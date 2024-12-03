@@ -3,7 +3,7 @@
 #include "freertos/task.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <lvgl.h>
+
 #include <TFT_eSPI.h>
 //#include "BluetoothSerial.h"
 
@@ -19,6 +19,88 @@ void* draw_buf;
 
 
 
+void led(void* args){
+  int i = 1000; 
+  while(1){
+    digitalWrite(LED, HIGH);
+    vTaskDelay(i/portTICK_PERIOD_MS);
+    digitalWrite(LED, LOW);
+    vTaskDelay(i/portTICK_PERIOD_MS);
+    i= (int)((float)i /1.2);
+    if(i == 0){
+      i = 1000;
+    }
+    //Serial.printf("%i\n", i);
+  }
+}
+
+unsigned int x_set = 5; 
+unsigned int y_set = 35; 
+unsigned int i = 1;
+template<typename ...Args>
+void debug(const char* format, Args... args){
+  if (y_set> 195){
+    i++;
+    x_set +=170;
+    y_set = 35;
+  }
+  tft.printf(format, args);
+  tft.setCursor(x_set, y_set);
+  //x_set += 10;
+  y_set+= 15;
+  if (i>2){
+    tft.fillScreen(TFT_BLACK);
+    x_set = 5;
+    y_set=35;
+    i=1;
+    tft.setCursor(x_set, y_set);
+  }
+}
+
+
+/*
+pio run; git-all; pio run --target upload && pio device monitor -b 115200
+*/
+
+void setup() {
+  Serial.begin(115200); //listen on port 115200
+
+  ///SerialBT.begin("ESP32test");
+
+  // tft gui basic 
+  tft.init();
+  tft.setRotation(1);  // Set display rotation (optional)
+
+  tft.fillScreen(TFT_BLACK);
+  // Print some text
+  tft.setTextColor(TFT_RED);  // Set text color to black
+  tft.setTextSize(2);  // Set text size
+  //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
+
+
+  pinMode(BACKLIGHT, OUTPUT);
+  analogWrite(BACKLIGHT, 255);
+  
+  xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
+  //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
+  
+ 
+
+  //tft.setCursor(x_set, y_set);  // Set cursor position
+}
+
+
+void loop() {
+  debug("hello%d",43243);
+
+  delay(1000);
+  //lv_timer_handler();
+}
+
+
+//LVGL CODE 
+/*
+#include <lvgl.h>
 
 // DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
 template <typename... Args>
@@ -39,65 +121,7 @@ lv_obj_t* debug_make(){
 }
 
 
-
-
-
-void led(void* args){
-  int i = 1000; 
-  while(1){
-    digitalWrite(LED, HIGH);
-    vTaskDelay(i/portTICK_PERIOD_MS);
-    digitalWrite(LED, LOW);
-    vTaskDelay(i/portTICK_PERIOD_MS);
-    i= (int)((float)i /1.2);
-    if(i == 0){
-      i = 1000;
-    }
-    //Serial.printf("%i\n", i);
-  }
-}
-
-void print_test(void* args){
-  lv_obj_t *d = debug_make();
-  while(1){
-    debug(d, "HELLO THERE%d\t%d", 32, 532);
-    vTaskDelay(1000/portTICK_RATE_MS);
-  }
-}
-
-
-/*
-pio run; git-all; pio run --target upload && pio device monitor -b 115200
-*/
-
-void setup() {
-  Serial.begin(115200); //listen on port 115200
-
-  ///SerialBT.begin("ESP32test");
-
-  // tft gui basic 
-  /*
-  tft.init();
-  tft.setRotation(1);  // Set display rotation (optional)
-
-  Change background to black
-  tft.fillScreen(TFT_BLACK);
-  // Print some text
-  tft.setTextColor(TFT_RED);  // Set text color to black
-  tft.setTextSize(2);  // Set text size
-  //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
-
-  tft.println("HELLO WORLD");
-
-  */
-
-  pinMode(BACKLIGHT, OUTPUT);
-  analogWrite(BACKLIGHT, 255);
-  
-  xTaskCreate(led, "blink led", 2048, NULL, 1, NULL);
-  //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
-  
-  lv_init();
+ lv_init();
   // malloc_cap_internal : internal flash sotrage
   draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA); // heap caps malloc: malloc but you can specify where the heap goes
   lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
@@ -115,13 +139,4 @@ void setup() {
   //debug(d,"those who know..%d\t%s",345,test);
   //debug(d,"hello worldd%d", 453);
 
-  //tft.setCursor(x_set, y_set);  // Set cursor position
-}
-
-
-void loop() {
-  
-  lv_timer_handler();
-  delay(5);
-  
-}
+*/
