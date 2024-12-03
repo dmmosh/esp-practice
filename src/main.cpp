@@ -84,10 +84,10 @@ void setup() {
   lv_obj_t *hello = lv_label_create(lv_scr_act());
   lv_label_set_text(hello, "HELLO\n THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
-  lv_label_set_text(hello, "HVXCJNCKLJVKLE");
+  lv_label_set_text(hello, "h");
 
-  // debug(lv_scr_act(),"those who know..%d\t%s",345,"dschkds");
-  // debug(lv_scr_act(),"hello worldd%d", 453);
+  debug(lv_scr_act(),"those who know..%d\t%s",345,"dschkds");
+  debug(lv_scr_act(),"hello worldd%d", 453);
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
