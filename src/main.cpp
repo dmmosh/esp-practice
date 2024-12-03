@@ -49,7 +49,7 @@ void debug(const char* format, Args... args){
 
   if (first_time){
     lv_obj_set_size(print_label, Y_RES,X_RES);
-    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,VERTICAL_OFFSET-font_height);
+    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,50+VERTICAL_OFFSET-font_height);
     first_time = false;
   }
 
