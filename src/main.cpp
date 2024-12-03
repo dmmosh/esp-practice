@@ -128,19 +128,18 @@ void loop() {
 
     char curr = SerialBT.read();
 
-    switch(curr){
-      case '\n':
-        buffer[chr] = '\0';
+    if(chr>98) chr = 0; // room for newline + null termination
+
+    buffer[chr] = curr;
+
+    if (chr == '\n'){
+        buffer[chr+1] = '\0';
         debug(buffer);
         chr=0;
-      break;
-      default:
-        buffer[chr] = curr;
     }
+    chr+=1;
     
 
-    chr+=1;
-    if(chr>100) chr = 0;
   }
   delay(5);
   //lv_timer_handler();
