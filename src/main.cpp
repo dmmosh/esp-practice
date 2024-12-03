@@ -53,10 +53,10 @@ void debug(const char* format, Args... args){
     first_time = false;
   }
 
-  char buffer[100] = "\n> ";
-  sprintf(buffer+3, format, args...);
+  char buffer[100];
+  sprintf(buffer, format, args...);
 
-  lv_label_set_text_fmt(print_label, "%s%s", lv_label_get_text(print_label), buffer);
+  lv_label_set_text_fmt(print_label, "%s\n> %s", lv_label_get_text(print_label), buffer);
 
   line_num++;
 
@@ -91,7 +91,7 @@ void setup() {
   lv_disp_set_rotation(disp,LV_DISPLAY_ROTATION_90);
 
   lv_obj_t *hello = lv_label_create(lv_scr_act());
-  lv_label_set_text(hello, "HELLO THERE");
+  lv_label_set_text(hello, "HELLO\n THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
   debug("those who know..%d\t%s",345,"dschkds");
