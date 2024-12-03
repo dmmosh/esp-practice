@@ -76,7 +76,7 @@ void setup() {
 
   lv_obj_t *hello = lv_label_create(lv_scr_act());
   lv_label_set_text(hello, "HELLO THERE");
-  lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
+  lv_obj_align(hello, LV_ALIGN_TOP_LEFT,0,0);
 
   debug(lv_scr_act(), "those who know..%d\t%s",345,"dschkds");
 
