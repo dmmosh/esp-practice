@@ -41,11 +41,11 @@ pio run; git-all; pio run --target upload && pio device monitor -b 115200
 
 void setup() {
   Serial.begin(115200); //listen on port 115200
-  //tft.init();
-  //tft.setRotation(1);  // Set display rotation (optional)
+  tft.init();
+  tft.setRotation(1);  // Set display rotation (optional)
 //
   //// Change background to black
-  //tft.fillScreen(TFT_BLACK);
+  tft.fillScreen(TFT_BLACK);
   //// Print some text
   //tft.setTextColor(TFT_RED);  // Set text color to black
   //tft.setTextSize(2);  // Set text size
