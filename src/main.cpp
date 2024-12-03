@@ -10,7 +10,6 @@
 #define BACKLIGHT 32 //backlight cpio
 #define X_RES TFT_WIDTH
 #define Y_RES TFT_HEIGHT
-#define CURR lv_scr_act() //current active screen 
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
@@ -62,18 +61,9 @@ void setup() {
   lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
   lv_disp_set_rotation(disp,LV_DISPLAY_ROTATION_90);
 
-  lv_obj_t * label1 = lv_label_create(lv_screen_active());
-    lv_label_set_long_mode(label1, LV_LABEL_LONG_WRAP);     /*Break the long lines*/
-    lv_label_set_text(label1, "Recolor is not supported for v9 now.");
-    lv_obj_set_width(label1, 150);  /*Set smaller width to make the lines wrap*/
-    lv_obj_set_style_text_align(label1, LV_TEXT_ALIGN_CENTER, 0);
-    //lv_obj_align(label1, LV_ALIGN_CENTER, 0, -40);
-
-    lv_obj_t * label2 = lv_label_create(lv_screen_active());
-    lv_label_set_long_mode(label2, LV_LABEL_LONG_SCROLL_CIRCULAR);     /*Circular scroll*/
-    lv_obj_set_width(label2, 150);
-    lv_label_set_text(label2, "It is a circularly scrolling text. ");
-    lv_obj_align(label2, LV_ALIGN_CENTER, 0, 0);
+  lv_obj_t *hello = lv_obj_create(lv_scr_act());
+  lv_label_set_text(hello, "HELLO THERE");
+  lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
