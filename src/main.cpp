@@ -34,15 +34,14 @@ void led(void* args){
 
 
 // DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
+lv_obj_t *print_label;
+bool first_time = true;
 template <typename... Args>
 void debug(const char* format, Args... args){
-  static lv_obj_t *print_label;
-  static bool first_time = true;
   //static uint16_t font_height = lv_obj_get_style_text_font(print_label,LV_PART_MAIN)->line_height; // font height
   
   if (first_time){
     *print_label = lv_label_create(lv_scr_act());
-    lv_obj_set_size(print_label, Y_RES,X_RES);
     lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,50+VERTICAL_OFFSET);
     first_time = false;
   }
