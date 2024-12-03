@@ -110,16 +110,24 @@ void setup() {
 }
 
 
+
 void loop() {
 
-  // check for message from serial monitor
-  if (Serial.available()){
-    SerialBT.write(Serial.read());
-  }
+  // // check for message from serial monitor
+  // if (Serial.available()){
+  //   SerialBT.write(Serial.read());
+  // }
 
-  //check for message from a paired bluetooth
+  // //check for message from a paired bluetooth
+  // if (SerialBT.available()){
+  //   Serial.write(SerialBT.read());
+  // }
+
   if (SerialBT.available()){
-    Serial.write(SerialBT.read());
+    char i = SerialBT.read();
+    if (i == '\n'){
+      debug("NEWLINE CHARACTER EXISTS");
+    }
   }
   delay(5);
   //lv_timer_handler();
