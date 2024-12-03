@@ -46,7 +46,7 @@ void debug(lv_obj_t* debug_obj, const char* format, Args... args){
 
 lv_obj_t* debug_make(){
   lv_obj_t* out = lv_label_create(lv_scr_act());
-  lv_label_set_text(out, "> DEBUG LOG");
+  lv_label_set_text_fmt(out, "> DEBUG LOG");
   lv_obj_set_size(out, Y_RES,X_RES);
   lv_obj_align(out, LV_ALIGN_TOP_LEFT, 5,50+VERTICAL_OFFSET);
   return out;
