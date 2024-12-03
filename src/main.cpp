@@ -8,8 +8,8 @@
 
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
-#define X_RES TFT_HEIGHT
-#define Y_RES TFT_WIDTH
+#define X_RES 320
+#define Y_RES 170
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
