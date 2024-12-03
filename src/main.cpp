@@ -46,7 +46,7 @@ void debug(const char* format, Args... args){
     x_set = 5;
     y_set=35;
     i=1;
-    tft.setCursor(x_set, y_set);
+    //tft.setCursor(x_set, y_set);
   }
 
   if (y_set> 170){ // to go col 2 
@@ -54,11 +54,11 @@ void debug(const char* format, Args... args){
     x_set +=170;
     y_set = 35;
   }
+  tft.setCursor(x_set, y_set);
 
   tft.printf(format, args...);
 
   y_set+= 20;
-  tft.setCursor(x_set, y_set);
   //x_set += 10;
 }
 
@@ -100,7 +100,7 @@ void setup() {
   tft.setTextSize(2);  // Set text size
   //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
 
-  //tft.setCursor(x_set, y_set);  // Set cursor position
+  tft.setCursor(x_set, y_set);  // Set cursor position
 
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 255);
