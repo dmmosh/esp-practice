@@ -49,7 +49,7 @@ void debug(const char* format, Args... args){
 
   if (first_time){
     lv_obj_set_size(print_label, Y_RES,X_RES);
-    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,VERTICAL_OFFSET-font_height);
+    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,VERTICAL_OFFSET);
     first_time = false;
   }
 
@@ -94,7 +94,7 @@ void setup() {
   lv_label_set_text(hello, "HELLO\n THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
-  debug("those who know..%d\t%s\n",345,"dschkds");
+  debug("those who know..%d\t%s",345,"dschkds");
   debug("hello worldd");
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
