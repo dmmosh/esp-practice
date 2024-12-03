@@ -49,7 +49,7 @@ void debug(const char* format, Args... args){
     //tft.setCursor(x_set, y_set);
   }
 
-  if (y_set> 170){ // to go col 2 
+  if (y_set> 190){ // to go col 2 
     i++;
     x_set +=170;
     y_set = 35;
