@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <lvgl.h>
 #include <TFT_eSPI.h>
-#include "BluetoothSerial.h"
+//#include "BluetoothSerial.h"
 
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
@@ -14,7 +14,7 @@
 #define VERTICAL_OFFSET 35
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8)) // refresh display buffer
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
-BluetoothSerial SerialBT;
+//BluetoothSerial SerialBT;
 void* draw_buf;
 
 
@@ -73,7 +73,7 @@ pio run; git-all; pio run --target upload && pio device monitor -b 115200
 void setup() {
   Serial.begin(115200); //listen on port 115200
 
-  SerialBT.begin("ESP32test");
+  ///SerialBT.begin("ESP32test");
 
   // tft gui basic 
   /*
