@@ -43,7 +43,7 @@ void debug(const char* format, Args... args){
   
 
   if (font_height*line_num > X_RES+VERTICAL_OFFSET){
-    //lv_label_set_text(print_label, " \n");
+    lv_label_set_text(print_label, " sdcndjsknkj\n");
     line_num=0;
   }
 
