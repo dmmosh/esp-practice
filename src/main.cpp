@@ -85,6 +85,7 @@ void setup() {
   lv_label_set_text(hello, "HELLO\n THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
+  lv_label_set_text(hello, "whooooo");
   debug("those who know..%d\t%s",345,"dschkds");
   debug("hello worldd%d", 453);
 
