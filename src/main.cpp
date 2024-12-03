@@ -8,8 +8,8 @@
 
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
-#define X_RES TFT_WIDTH
-#define Y_RES TFT_HEIGHT
+#define X_RES TFT_HEIGHT
+#define Y_RES TFT_WIDTH
 #define CURR lv_scr_act() //current active screen 
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
@@ -44,7 +44,7 @@ unsigned int y_set = 35;
 unsigned int i = 1;
 
 void setup() {
-  Serial.begin(115200); //listen on port 9600
+  Serial.begin(115200); //listen on port 115200
   //tft.init();
   //tft.setRotation(1);  // Set display rotation (optional)
 //
