@@ -110,7 +110,8 @@ void setup() {
 }
 
 
-
+char buffer[101];
+int i = 0;
 void loop() {
 
   // // check for message from serial monitor
@@ -124,10 +125,22 @@ void loop() {
   // }
 
   if (SerialBT.available()){
-    char i = SerialBT.read();
-    if (i == '\n'){
-      debug("NEWLINE CHARACTER EXISTS");
+
+    char curr = SerialBT.read();
+
+    switch(curr){
+      case '\n':
+        buffer[i] = '\0';
+        debug(buffer);
+        i=0;
+      break;
+      default:
+        buffer[i] = curr;
     }
+    
+
+    i+=1;
+    if(i>100) i = 0;
   }
   delay(5);
   //lv_timer_handler();
