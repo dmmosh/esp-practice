@@ -10,6 +10,7 @@
 #define BACKLIGHT 32 //backlight cpio
 #define X_RES 170 // y (rotated)
 #define Y_RES 320 // x (rotated)
+#define VERTICAL_OFFSET 35
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
@@ -76,7 +77,7 @@ void setup() {
 
   lv_obj_t *hello = lv_label_create(lv_scr_act());
   lv_label_set_text(hello, "HELLO THERE");
-  lv_obj_align(hello, LV_ALIGN_TOP_LEFT,0,30);
+  lv_obj_align(hello, LV_ALIGN_TOP_LEFT,0,35);
 
   debug(lv_scr_act(), "those who know..%d\t%s",345,"dschkds");
 
