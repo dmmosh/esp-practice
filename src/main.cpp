@@ -98,7 +98,8 @@ void setup() {
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
   
   lv_init();
-  draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
+  // malloc_cap_internal : internal flash sotrage
+  draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA); // heap caps malloc: malloc but you can specify where the heap goes
   lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
   lv_disp_set_rotation(disp,LV_DISPLAY_ROTATION_90);
 
