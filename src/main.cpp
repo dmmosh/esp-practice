@@ -37,7 +37,7 @@ void led(void* args){
 template <typename... Args>
 void debug(lv_obj_t* debug_obj, const char* format, Args... args){
 
-  char buffer[100];
+  char buffer[150];
   sprintf(buffer, format, args...);
   lv_label_set_text_fmt(debug_obj,"%s\n> %s",lv_label_get_text(debug_obj), buffer);
 
