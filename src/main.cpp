@@ -34,7 +34,7 @@ void led(void* args){
 
 // DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
 template <typename... Args>
-void debug(void* format, Args... args){
+void debug(const char* format, Args... args){
   static lv_obj_t *print_label = lv_label_create(lv_scr_act());
   static int16_t y_offset = 0;
   
@@ -51,6 +51,14 @@ void debug(void* format, Args... args){
   }
 }
 
+void debug_loop(void* args){
+  const char* hello = "jndknclkd";
+
+  while(1){
+  debug("those who know..%d\t%s",345,hello);
+  vTaskDelay(1000/portTICK_PERIOD_MS);
+  }
+}
 
 
 
@@ -85,6 +93,7 @@ void setup() {
   lv_label_set_text(hello, "HELLO THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
+  xTaskCreate(debug_loop, "debug debug fun", 4000, NULL, 2, NULL);
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
