@@ -138,14 +138,11 @@ void loop() {
         buffer[chr] = '\0';
         debug("%s",buffer);
         chr=0;
-        buffer[0] = '\0';
       break;
       default:
         buffer[chr] = curr;
+        chr++;
     }
-    
-
-    chr++;
     if(chr>99) chr = 0;
   }
   delay(5);
