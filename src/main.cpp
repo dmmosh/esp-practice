@@ -36,6 +36,7 @@ void led(void* args){
 // DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
 template <typename... Args>
 void debug(lv_obj_t* debug_obj, const char* format, Args... args){
+  static int 
 
   char buffer[150];
   sprintf(buffer, format, args...);
@@ -87,7 +88,8 @@ void setup() {
 
   lv_obj_t *d = debug_make();
 
-  debug(d,"those who know..%d\t%s",345,"dschkds");
+  char* test = "fdjshckd";
+  debug(d,"those who know..%d\t%s",345,test);
   debug(d,"hello worldd%d", 453);
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
