@@ -46,7 +46,7 @@ void debug(const char* format, Args... args){
     x_set +=170;
     y_set = 35;
   }
-  
+
   if (i>2){ // reset
     tft.fillScreen(TFT_BLACK);
     x_set = 5;
@@ -138,13 +138,14 @@ void loop() {
         buffer[chr] = '\0';
         debug("%s",buffer);
         chr=0;
+        buffer[0] = '\0';
       break;
       default:
         buffer[chr] = curr;
     }
     
 
-    chr+=1;
+    chr++;
     if(chr>99) chr = 0;
   }
   delay(5);
