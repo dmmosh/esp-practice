@@ -36,23 +36,24 @@ void led(void* args){
 template <typename... Args>
 void debug(const char* format, Args... args){
   static lv_obj_t *print_label = lv_label_create(lv_scr_act());
-  static int16_t y_offset = 0;
-  
-  char buffer[100] = "> ";
-  sprintf(buffer+2, format, args...);
-  lv_label_set_text(print_label, buffer);
-
-  lv_obj_align(print_label, LV_ALIGN_TOP_LEFT,0,y_offset);
-  y_offset+=10;
-
-  if (y_offset>240){
-    y_offset=0;
-    lv_scr_load(NULL);
+  static bool first_time = true;
+  if (first_time){
+    lv_obj_align(print_label, LV_ALIGN_TOP_LEFT, 5,5);
+    lv_label_set_text(print_label,"test");
+    first_time = false;
   }
+
+
 }
 
 
-
+void debug_loop(void* args){
+  const char* hi = "fsndjkcd";
+  while(1){
+    debug("those who know..%d\t%s",345,hi);
+    vTaskDelay(1000/portTICK_PERIOD_MS);
+  }
+}
 
 /*
 pio run; git-all; pio run --target upload && pio device monitor -b 115200
@@ -85,8 +86,7 @@ void setup() {
   lv_label_set_text(hello, "HELLO THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
-  const char* hi = "jndknclkd";
-  debug("those who know..%d\t%s",345,hi);
+  xTaskCreate(debug_loop, "loop debug", 4000,NULL, 1, NULL);
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
