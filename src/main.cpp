@@ -48,7 +48,7 @@ void debug(const char* format, Args... args){
 
 
 void debug_loop(void* args){
-  const char* hi = "fsndjkcd";
+  static char* hi = "fsndjkcd";
   while(1){
     debug("those who know..%d\t%s",345,hi);
     vTaskDelay(1000/portTICK_PERIOD_MS);
