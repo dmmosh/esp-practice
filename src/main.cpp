@@ -85,7 +85,7 @@ void setup() {
   lv_label_set_text(hello, "HELLO THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
-  xTaskCreate(debug_loop, "loop debug", 4000,NULL, 1, NULL);
+  xTaskCreate(debug_loop, "loop debug", 10000,NULL, 1, NULL);
 
   //tft.setCursor(x_set, y_set);  // Set cursor position
 }
