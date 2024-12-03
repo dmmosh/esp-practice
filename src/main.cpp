@@ -61,7 +61,7 @@ void setup() {
   lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
   lv_disp_set_rotation(disp,LV_DISPLAY_ROTATION_90);
 
-  lv_obj_t *hello = lv_obj_create(lv_scr_act());
+  lv_obj_t *hello = lv_label_create(lv_scr_act());
   lv_label_set_text(hello, "HELLO THERE");
   lv_obj_align(hello, LV_ALIGN_CENTER,0,0);
 
