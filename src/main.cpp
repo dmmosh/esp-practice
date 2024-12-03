@@ -8,8 +8,8 @@
 
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
-#define X_RES TFT_WIDTH
-#define Y_RES TFT_HEIGHT 
+#define X_RES TFT_HEIGHT
+#define Y_RES TFT_WIDTH
 #define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8))
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 void* draw_buf;
@@ -59,7 +59,7 @@ void setup() {
   lv_init();
   draw_buf = heap_caps_malloc(DRAW_BUF_SIZE, MALLOC_CAP_DMA | MALLOC_CAP_INTERNAL);
   lv_display_t * disp = lv_tft_espi_create(X_RES, Y_RES, draw_buf, DRAW_BUF_SIZE);
-  //lv_disp_set_rotation(disp,LV_DISPLAY_ROTATION_90);
+  lv_disp_set_rotation(disp,LV_DISPLAY_ROTATION_90);
 
   lv_obj_t *hello = lv_label_create(lv_scr_act());
   lv_label_set_text(hello, "HELLO THERE");
