@@ -48,7 +48,7 @@ void debug(lv_obj_t* curr, const char* format, Args... args){
 
   char buffer[100];
   sprintf(buffer, format, args...);
-  lv_label_set_text_fmt(print_label,"> %s"buffer);
+  lv_label_set_text_fmt(print_label,"> %s",buffer);
 
 
 }
