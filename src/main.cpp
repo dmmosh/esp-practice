@@ -35,7 +35,7 @@ void led(void* args){
 // DEBUG IN PRINTF STYLE TERMINAL ON THE ESP32
 template <typename... Args>
 void debug(void* format, Args... args){
-  static lv_disp_t *print_label = lv_label_create(lv_scr_act());
+  static lv_obj_t *print_label = lv_label_create(lv_scr_act());
   static int16_t y_offset = 0;
   
   char buffer[100] = "> ";
