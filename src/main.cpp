@@ -49,7 +49,7 @@ void debug(const char* format, Args... args){
     first_time = false;
   }
 
-  char buffer[100];
+  static char buffer[100];
   sprintf(buffer, format, args...);
 
   lv_label_set_text_fmt(print_label, "%s%s", lv_label_get_text(print_label), buffer);
