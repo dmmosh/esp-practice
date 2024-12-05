@@ -172,10 +172,10 @@ void loop() {
 
         // Check to see if the client request was "GET /H" or "GET /L":
         if (currentLine.endsWith("GET /H")) {
-          digitalWrite(5, HIGH);  // GET /H turns the LED on
+          debug("hello world");
         }
         if (currentLine.endsWith("GET /L")) {
-          digitalWrite(5, LOW);  // GET /L turns the LED off
+          debug("goodbyye world");
         }
       }
     }
