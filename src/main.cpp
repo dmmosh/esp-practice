@@ -135,6 +135,8 @@ void setup() {
 
 
 void loop() {
+  Serial.begin(115200); //listen on port 115200
+
   Serial.print(ssid);
   Serial.print(pass);
 
