@@ -136,8 +136,8 @@ void setup() {
 
 void loop() {
 
-  Serial.print(ssid);
-  Serial.print(pass);
+  Serial.print(ssid.c_str());
+  Serial.print(pass.c_str());
 
   delay(500);
   //lv_timer_handler();
