@@ -148,7 +148,7 @@ void loop() {
 
           // if the current line is blank, you got two newline characters in a row.
           // that's the end of the client HTTP request, so send a response:
-          if (currentLine.length() == 0) {
+          if (currentLine.length() == 0) { // send a response 
             // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
             // and a content-type so the client knows what's coming, then a blank line:
             client.println("HTTP/1.1 200 OK");
@@ -156,8 +156,10 @@ void loop() {
             client.println();
 
             // the content of the HTTP response follows the header:
-            client.print("Click <a href=\"/H\">here</a> to turn the LED on pin 5 on.<br>");
-            client.print("Click <a href=\"/L\">here</a> to turn the LED on pin 5 off.<br>");
+            client.print("<p style=\"font-size:18px;\">hello world: </p>");
+            client.print("<a style=\"font-size:18px;\" href=\"/H=hi\"  >click here</a><br>");
+            client.print("<p style=\"font-size:18px;\">goodbye world: </p>");
+            client.print("<a style=\"font-size:18px;\"  href=\"/bye\"  >click here</a><br>");
 
             // The HTTP response ends with another blank line:
             client.println();
@@ -171,10 +173,10 @@ void loop() {
         }
 
         // Check to see if the client request was "GET /H" or "GET /L":
-        if (currentLine.endsWith("GET /H")) {
+        if (currentLine.endsWith("GET /hi")) {
           debug("hello world");
         }
-        if (currentLine.endsWith("GET /L")) {
+        if (currentLine.endsWith("GET /bye")) {
           debug("goodbyye world");
         }
       }
