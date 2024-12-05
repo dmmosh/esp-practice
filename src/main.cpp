@@ -128,8 +128,6 @@ void setup() {
   // debug("wifi connected %is", (unsigned int)seconds);
   // debug("ip: %s", WiFi.localIP().toString().c_str());
   
-  Serial.print(getenv("WIFI_NAME"));
-  Serial.print(getenv("WIFI_PASS"));
   tft.setCursor(x_set, y_set);  // Set cursor position
  
 
@@ -138,6 +136,8 @@ void setup() {
 
 void loop() {
 
+  Serial.print(SSID);
+  Serial.print(PASS);
 
   delay(500);
   //lv_timer_handler();
