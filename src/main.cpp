@@ -136,8 +136,8 @@ void setup() {
 
 void loop() {
 
-  debug(getenv("WIFI_NAME"));
-  debug(getenv("WIFI_PASS"));
+  Serial.print(getenv("WIFI_NAME"));
+  Serial.print(getenv("WIFI_PASS"));
 
   delay(500);
   //lv_timer_handler();
