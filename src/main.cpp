@@ -174,7 +174,7 @@ void loop() {
           debug("hello world");
         }
         if (curr.endsWith("GET /L")) {
-          debug("GOODBYE WORLD")
+          debug("GOODBYE WORLD");
         }
       }
     }
