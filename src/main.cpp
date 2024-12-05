@@ -113,8 +113,10 @@ void setup() {
 
 
   WiFi.begin(SSID, PASS);
+
   uint16_t seconds = 0;
   while(WiFi.status() != WL_CONNECT_FAILED){
+    debug("%s %s ", SSID, PASS);
     debug("connecting to wifi... %is", (unsigned int)seconds);
     delay(1000);
     seconds++;
