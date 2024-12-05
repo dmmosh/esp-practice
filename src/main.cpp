@@ -18,8 +18,8 @@ TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 WiFiServer server(80);
 
 
-char* ssid = getenv("WIFI_NAME"); // wifi name
-char* pass = getenv("WIFI_PASS"); // wifi password
+std::string ssid = getenv("WIFI_NAME"); // wifi name
+std::string pass = getenv("WIFI_PASS"); // wifi password
 
 
 
@@ -136,8 +136,8 @@ void setup() {
 
 void loop() {
 
-  Serial.print("ssid");
-  Serial.print("pass");
+  Serial.print(ssid);
+  Serial.print(pass);
 
   delay(500);
   //lv_timer_handler();
