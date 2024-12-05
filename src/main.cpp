@@ -125,7 +125,7 @@ void setup() {
     seconds++;
   }
   debug("wifi connected %is", (unsigned int)seconds);
-  debug("ip: %s", WiFi.localIP().toString().c_str());
+  Serial.print(WiFi.localIP());
   
   tft.setCursor(x_set, y_set);  // Set cursor position
  
