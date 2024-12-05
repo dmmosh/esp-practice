@@ -115,7 +115,7 @@ void setup() {
   //xTaskCreate(vTaskMemoryUsage, "task monitor", 2048, NULL, 1, NULL);
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
 
-
+  
   WiFi.begin(ssid, pass);
 
   uint16_t seconds = 0;
@@ -124,6 +124,7 @@ void setup() {
     delay(1000);
     seconds++;
   }
+  server.begin();
   debug("wifi connected %is", (unsigned int)seconds);
   debug("ip: %s", WiFi.localIP().toString().c_str());
   
@@ -134,7 +135,7 @@ void setup() {
 
 
 void loop() {
-  WiFiClient client = server.accept();  // listen for incoming clients
+  WiFiClient client = server.available();  // listen for incoming clients
 
   if (client) {                     // if you get a client,
     Serial.println("New Client.");  // print a message out the serial port
