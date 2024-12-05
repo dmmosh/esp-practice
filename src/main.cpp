@@ -131,8 +131,8 @@ void setup() {
 
 
 void loop() {
-  debug("%s", SSID);
-  debug("%s", PASS);
+  debug("%s", "sdajhjks");
+  debug("%s", "dsjkh");
   delay(5);
   //lv_timer_handler();
 }
