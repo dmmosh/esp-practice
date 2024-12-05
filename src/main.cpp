@@ -117,6 +117,7 @@ void setup() {
   while(WiFi.status() != WL_CONNECT_FAILED){
     debug("connecting to wifi... %is", (unsigned int)seconds);
     delay(1000);
+    seconds++;
   }
   debug("wifi connected %is", (unsigned int)seconds);
   debug("ip: %s", WiFi.localIP().toString().c_str());
