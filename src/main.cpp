@@ -2,7 +2,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include <stdio.h>
-#include <cstdlib>
+#include <stdlib.h>
 #include <WiFi.h>
 #include <TFT_eSPI.h>
 //#include "BluetoothSerial.h"
@@ -18,8 +18,8 @@ TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 WiFiServer server(80);
 
 
-const char* ssid = std::getenv("WIFI_NAME"); // wifi name
-const char* pass = std::getenv("WIFI_PASS"); // wifi password
+const char* ssid = secure_getenv("WIFI_NAME"); // wifi name
+const char* pass = secure_getenv("WIFI_PASS"); // wifi password
 
 
 
@@ -62,7 +62,11 @@ void debug(const char* format, Args... args){
 
   tft.setCursor(x_set, y_set);
 
-  tft.printf(format, args...);
+  if constexpr (sizeof...(args) == 0){
+    tft.print(format);
+  } else {
+    tft.printf(format, args...);
+  }
 
   y_set+= 20;
   //x_set += 10;
@@ -131,8 +135,8 @@ void setup() {
 
 
 void loop() {
-  debug("%s", ssid);
-  debug("%s", pass);
+  debug(ssid);
+  debug(pass);
   delay(500);
   //lv_timer_handler();
 }
