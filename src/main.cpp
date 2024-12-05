@@ -16,8 +16,6 @@
 //#define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8)) // refresh display buffer
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 WiFiServer server(80);
-#define SSID WIFI_SSID
-#define PASS WIFI_PASS
 // char* ssid = getenv("WIFI_NAME"); // wifi name
 // char* pass = getenv("WIFI_PASS"); // wifi password
 // 
