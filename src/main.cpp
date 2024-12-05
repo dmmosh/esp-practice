@@ -119,7 +119,7 @@ void setup() {
   WiFi.begin(ssid, pass);
 
   uint16_t seconds = 0;
-  while(WiFi.status() != WL_CONNECT_FAILED){
+  while(WiFi.status() != WL_CONNECTED){
     debug(ssid);
     debug(pass);
     debug("connecting %is", (unsigned int)seconds);
