@@ -125,7 +125,7 @@ void setup() {
     seconds++;
   }
   debug("wifi connected %is", (unsigned int)seconds);
-  debug("ip: %s", WiFi.localIPv6());
+  debug("ip: %s", WiFi.localIPv6().toString().c_str());
   
   tft.setCursor(x_set, y_set);  // Set cursor position
  
