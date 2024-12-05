@@ -131,7 +131,8 @@ void setup() {
 
 
 void loop() {
-
+  Serial.print(SSID);
+  Serial.print(PASS);
   delay(5);
   //lv_timer_handler();
 }
