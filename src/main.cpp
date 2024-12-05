@@ -7,6 +7,7 @@
 #include <TFT_eSPI.h>
 //#include "BluetoothSerial.h"
 
+// DISPLAY DRIVER: HX8357D_DRIVER
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
 #define X_RES 240 // y (rotated)
@@ -92,8 +93,6 @@ pio run; git-all; pio run --target upload && pio device monitor -b 115200
 
 void setup() {
   Serial.begin(115200); //listen on port 115200
-  WiFi.begin(SSID, PASS);
-
 
   // tft gui basic 
   tft.init();
@@ -111,6 +110,15 @@ void setup() {
   xTaskCreate(led, "blink led", 1048, NULL, 1, NULL);
   //xTaskCreate(vTaskMemoryUsage, "task monitor", 2048, NULL, 1, NULL);
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
+
+
+  WiFi.begin(SSID, PASS);
+  uint16_t seconds = 0;
+  while(WiFi.status() != WL_CONNECT_FAILED){
+    debug("connecting to wifi... %is", (unsigned int)seconds);
+  }
+  debug("wifi connected %is", (unsigned int)seconds);
+  debug("ip: %s", WiFi.localIP().toString().c_str());
   
   tft.setCursor(x_set, y_set);  // Set cursor position
  
