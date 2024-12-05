@@ -130,14 +130,14 @@ void setup() {
   
   tft.setCursor(x_set, y_set);  // Set cursor position
  
+  Serial.print(SSID);
+  Serial.print(PASS);
 
 }
 
 
 void loop() {
 
-  Serial.print(SSID);
-  Serial.print(PASS);
 
   delay(500);
   //lv_timer_handler();
