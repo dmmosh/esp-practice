@@ -20,8 +20,8 @@ WiFiServer server(80);
 // char* pass = getenv("WIFI_PASS"); // wifi password
 // 
 
-char* ssid = WIFI_SSID;
-char * pass = WIFI_PASS;
+const char* ssid = WIFI_SSID;
+const char * pass = WIFI_PASS;
 
 
 void led(void* args){
@@ -116,22 +116,19 @@ void setup() {
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
 
 
-  // WiFi.begin(SSID, PASS);
+  WiFi.begin(ssid, pass);
 
-  // uint16_t seconds = 0;
-  // while(WiFi.status() != WL_CONNECT_FAILED){
-  //   debug("%s %s ", SSID, PASS);
-  //   debug("connecting to wifi... %is", (unsigned int)seconds);
-  //   delay(1000);
-  //   seconds++;
-  // }
-  // debug("wifi connected %is", (unsigned int)seconds);
-  // debug("ip: %s", WiFi.localIP().toString().c_str());
+  uint16_t seconds = 0;
+  while(WiFi.status() != WL_CONNECT_FAILED){
+    debug("connecting to wifi... %is", (unsigned int)seconds);
+    delay(1000);
+    seconds++;
+  }
+  debug("wifi connected %is", (unsigned int)seconds);
+  debug("ip: %s", WiFi.localIP().toString().c_str());
   
   tft.setCursor(x_set, y_set);  // Set cursor position
  
-  Serial.print(ssid);
-  Serial.print(pass);
 
 }
 
@@ -139,7 +136,7 @@ void setup() {
 void loop() {
 
 
-  delay(500);
+  delay(5);
   //lv_timer_handler();
 }
 
