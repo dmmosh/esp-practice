@@ -156,8 +156,8 @@ void loop() {
             client.println();
 
             // the content of the HTTP response follows the header:
-            client.print("<p align="center" style=\"font-size:18px;\">hello world: <a style=\"font-size:40px;\" href=\"/hi\"  >click here</a></p><br>");
-            client.print("<p style=\"font-size:18px;\">goodbye world: <a style=\"font-size:40px;\"  href=\"/bye\"  >click here</a></p> <br>");
+            client.print("<p align=\"center\" style=\"font-size:18px;\">hello world: <a style=\"font-size:40px;\" href=\"/hi\"  >click here</a></p><br>");
+            client.print("<p align=\"center\" style=\"font-size:18px;\">goodbye world: <a style=\"font-size:40px;\"  href=\"/bye\"  >click here</a></p> <br>");
 
             // The HTTP response ends with another blank line:
             client.println();
