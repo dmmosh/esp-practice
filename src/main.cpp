@@ -3,19 +3,23 @@
 #include "freertos/task.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <WiFi.h>
 #include <TFT_eSPI.h>
-#include "BluetoothSerial.h"
+//#include "BluetoothSerial.h"
 
 #define LED 2 // led
 #define BACKLIGHT 32 //backlight cpio
 #define X_RES 240 // y (rotated)
 #define Y_RES 320 // x (rotated)
 #define VERTICAL_OFFSET 35
-#define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8)) // refresh display buffer
+//#define DRAW_BUF_SIZE (X_RES * Y_RES / 10 * (LV_COLOR_DEPTH / 8)) // refresh display buffer
 TFT_eSPI tft = TFT_eSPI(); // Create TFT object
-BluetoothSerial SerialBT;
-void* draw_buf;
+WiFiServer server(80);
+
+
+#define SSID getenv("WIFI_NAME") // wifi name
+#define PASS getenv("WIFI_PASS") // wifi password
+
 
 
 
@@ -88,8 +92,8 @@ pio run; git-all; pio run --target upload && pio device monitor -b 115200
 
 void setup() {
   Serial.begin(115200); //listen on port 115200
+  WiFi.begin(SSID, PASS);
 
-  SerialBT.begin("ESP32test");
 
   // tft gui basic 
   tft.init();
@@ -99,9 +103,7 @@ void setup() {
   // Print some text
   tft.setTextColor(TFT_RED);  // Set text color to black
   tft.setTextSize(2);  // Set text size
-  //tft.fillRect(0,35, 320,170, TFT_BLACK); // offset in y direction is 35 px
 
-  tft.setCursor(x_set, y_set);  // Set cursor position
 
   pinMode(BACKLIGHT, OUTPUT);
   analogWrite(BACKLIGHT, 255);
@@ -110,41 +112,14 @@ void setup() {
   //xTaskCreate(vTaskMemoryUsage, "task monitor", 2048, NULL, 1, NULL);
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
   
+  tft.setCursor(x_set, y_set);  // Set cursor position
  
 
 }
 
 
-char buffer[101];
-uint8_t chr = 0;
 void loop() {
 
-  // // check for message from serial monitor
-  // if (Serial.available()){
-  //   SerialBT.write(Serial.read());
-  // }
-
-  // //check for message from a paired bluetooth
-  // if (SerialBT.available()){
-  //   Serial.write(SerialBT.read());
-  // }
-
-  if (SerialBT.available()){
-
-    char curr = SerialBT.read();
-
-    switch(curr){
-      case '\n':
-        buffer[chr] = '\0';
-        debug("%s",buffer);
-        chr=0;
-      break;
-      default:
-        buffer[chr] = curr;
-        chr++;
-    }
-    if(chr>99) chr = 0;
-  }
   delay(5);
   //lv_timer_handler();
 }
