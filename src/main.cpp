@@ -130,8 +130,8 @@ void setup() {
   
   tft.setCursor(x_set, y_set);  // Set cursor position
  
-  Serial.print(SSID);
-  Serial.print(PASS);
+  Serial.print(SSID.c_str());
+  Serial.print(PASS.c_str());
 
 }
 
