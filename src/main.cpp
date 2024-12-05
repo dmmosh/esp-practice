@@ -2,7 +2,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <WiFi.h>
 #include <TFT_eSPI.h>
 //#include "BluetoothSerial.h"
@@ -18,8 +18,8 @@ TFT_eSPI tft = TFT_eSPI(); // Create TFT object
 WiFiServer server(80);
 
 
-#define SSID getenv("WIFI_NAME") // wifi name
-#define PASS getenv("WIFI_PASS") // wifi password
+#define SSID std::getenv("WIFI_NAME") // wifi name
+#define PASS std::getenv("WIFI_PASS") // wifi password
 
 
 
@@ -112,17 +112,17 @@ void setup() {
   //xTaskCreate(print_test, "debug test", 4000, NULL, 1, NULL);
 
 
-  WiFi.begin(SSID, PASS);
+  // WiFi.begin(SSID, PASS);
 
-  uint16_t seconds = 0;
-  while(WiFi.status() != WL_CONNECT_FAILED){
-    debug("%s %s ", SSID, PASS);
-    debug("connecting to wifi... %is", (unsigned int)seconds);
-    delay(1000);
-    seconds++;
-  }
-  debug("wifi connected %is", (unsigned int)seconds);
-  debug("ip: %s", WiFi.localIP().toString().c_str());
+  // uint16_t seconds = 0;
+  // while(WiFi.status() != WL_CONNECT_FAILED){
+  //   debug("%s %s ", SSID, PASS);
+  //   debug("connecting to wifi... %is", (unsigned int)seconds);
+  //   delay(1000);
+  //   seconds++;
+  // }
+  // debug("wifi connected %is", (unsigned int)seconds);
+  // debug("ip: %s", WiFi.localIP().toString().c_str());
   
   tft.setCursor(x_set, y_set);  // Set cursor position
  
