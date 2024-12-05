@@ -135,10 +135,8 @@ void setup() {
 
 void loop() {
   WiFiClient client = server.accept();
-  if(!client) {
-    delay(5);
-    return;
-  }
+  
+  if(client){
   String curr = "";
   while (client.connected()) {    // loop while the client's connected
       if (client.available()) {     // if there's bytes to read from the client,
@@ -182,7 +180,7 @@ void loop() {
     // close the connection:
     client.stop();
     Serial.println("Client Disconnected.");
-    delay(5);
+  }
 
   //lv_timer_handler();
 }
