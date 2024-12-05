@@ -173,9 +173,11 @@ void loop() {
         // Check to see if the client request was "GET /H" or "GET /L":
         if (currentLine.endsWith("GET /hi")) {
           debug("hello world");
+          client.print("<script>history.go(-1);</script>");
         }
         if (currentLine.endsWith("GET /bye")) {
           debug("goodbyye world");
+          client.print("<script>history.go(-1);</script>");
         }
       }
     }
