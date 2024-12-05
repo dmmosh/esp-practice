@@ -134,7 +134,7 @@ void setup() {
 
 
 void loop() {
-  WiFiClient client = server.available();
+  WiFiClient client = server.accept();
   if(!client) {
     delay(5);
     return;
