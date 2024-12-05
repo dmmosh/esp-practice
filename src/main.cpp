@@ -135,10 +135,9 @@ void setup() {
 
 
 void loop() {
-  Serial.begin(115200); //listen on port 115200
 
-  Serial.print(ssid);
-  Serial.print(pass);
+  Serial.print("ssid");
+  Serial.print("pass");
 
   delay(500);
   //lv_timer_handler();
