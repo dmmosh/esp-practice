@@ -20,6 +20,8 @@ WiFiServer server(80);
 // char* pass = getenv("WIFI_PASS"); // wifi password
 // 
 
+char* ssid = WIFI_SSID;
+char * pass = WIFI_PASS;
 
 
 void led(void* args){
@@ -128,8 +130,8 @@ void setup() {
   
   tft.setCursor(x_set, y_set);  // Set cursor position
  
-  Serial.print(SSID);
-  Serial.print(PASS);
+  Serial.print(ssid);
+  Serial.print(pass);
 
 }
 
