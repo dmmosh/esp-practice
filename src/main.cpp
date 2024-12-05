@@ -231,7 +231,7 @@
 
 
 
-
+#include <SPI.h>
 #include <WiFi.h>
 
 const char *ssid = WIFI_SSID;
