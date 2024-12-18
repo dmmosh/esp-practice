@@ -23,24 +23,24 @@ void blink(void* light){
 
 void setup() {
     Serial.begin(115200);
-    //pinMode(LED_ONBOARD, OUTPUT);
-    //pinMode(LED_OUTSIDE, OUTPUT); // LED TO POWER other esp chips
+    pinMode(LED_ONBOARD, OUTPUT);
+    pinMode(LED_OUTSIDE, OUTPUT); // LED TO POWER other esp chips
 
-    //digitalWrite(LED_OUTSIDE,HIGH);
+    digitalWrite(LED_OUTSIDE,HIGH);
 
-    //xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
+    xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
 
-    //Serial.printf("%s %s\n", WIFI_NAME, WIFI_PASS);
-    // WiFi.begin(WIFI_NAME,WIFI_PASS);
-    // uint16_t seconds = 0;
-    // while(WiFi.status() != WL_CONNECTED){
-    //     Serial.printf("Connecting to Wifi... %is\n", (unsigned int)seconds);
-    //     vTaskDelay(500/portTICK_PERIOD_MS);
-    //     seconds++;
-    // }
-    // server.begin();
-    // Serial.printf("Wifi connected %is\n", seconds);
-    // Serial.printf("ip: %s\n",WiFi.localIP().toString().c_str());
+    Serial.printf("%s %s\n", WIFI_NAME, WIFI_PASS);
+    WiFi.begin(WIFI_NAME,WIFI_PASS);
+    uint16_t seconds = 0;
+    while(WiFi.status() != WL_CONNECTED){
+        Serial.printf("Connecting to Wifi... %is\n", (unsigned int)seconds);
+        vTaskDelay(1000/portTICK_PERIOD_MS);
+        seconds++;
+    }
+    server.begin();
+    Serial.printf("Wifi connected %is\n", seconds);
+    Serial.printf("ip: %s\n",WiFi.localIP().toString().c_str());
 
   // put your setup code here, to run once:S
 }
@@ -51,7 +51,6 @@ pio device monitor -b 115200
 */
 
 void loop() {
-    Serial.print("hello\n");
 
     vTaskDelay(5/portTICK_PERIOD_MS);
   // put your main code here, to run repeatedly:
