@@ -30,17 +30,17 @@ void setup() {
     //digitalWrite(LED_OUTSIDE,HIGH);
 
     xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
-    Serial.printf("%s %s\n", ssid,pass);
-    WiFi.begin(ssid,pass);
-    uint16_t seconds = 0;
-    while(WiFi.status() != WL_CONNECTED){
-        Serial.printf("Connecting to Wifi... %is\n", seconds);
-        vTaskDelay(500/portTICK_PERIOD_MS);
-        seconds++;
-    }
-    server.begin();
-    Serial.printf("Wifi connected %is\n", seconds);
-    Serial.printf("ip: %s\n",WiFi.localIP().toString().c_str());
+    Serial.printf("%s %s\n", getenv("WIFI_NAME"),getenv("WIFI_PASS"));
+    // WiFi.begin(ssid,pass);
+    // uint16_t seconds = 0;
+    // while(WiFi.status() != WL_CONNECTED){
+    //     Serial.printf("Connecting to Wifi... %is\n", seconds);
+    //     vTaskDelay(500/portTICK_PERIOD_MS);
+    //     seconds++;
+    // }
+    // server.begin();
+    // Serial.printf("Wifi connected %is\n", seconds);
+    // Serial.printf("ip: %s\n",WiFi.localIP().toString().c_str());
 
   // put your setup code here, to run once:S
 }
