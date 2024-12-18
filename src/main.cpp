@@ -20,11 +20,11 @@ void setup() {
     Serial.begin(115200);
     pinMode(LED_ONBOARD, OUTPUT);
     pinMode(LED_OUTSIDE, OUTPUT); // LED TO POWER other esp chips
-    
 
+    digitalWrite(LED_OUTSIDE,HIGH);
 
     xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
-  // put your setup code here, to run once:
+  // put your setup code here, to run once:S
 }
 
 /*
