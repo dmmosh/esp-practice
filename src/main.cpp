@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "freertos/FreeRTOS.h"
-#define LED 2
+#define LED 22
 
 
 void blink(void* args){
