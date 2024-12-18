@@ -39,7 +39,6 @@ void setup() {
     }
     server.begin();
     Serial.printf("Wifi connected %is\n", seconds);
-    Serial.printf("ip: %s\n",WiFi.localIP().toString().c_str());
 
   // put your setup code here, to run once:S
 }
