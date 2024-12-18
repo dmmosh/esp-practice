@@ -7,6 +7,8 @@
 WiFiServer server(80);
 const int8_t LED_ONBOARD = 2;
 const int8_t LED_OUTSIDE = 15; 
+const char* SSID = WIFI_NAME;
+const char* PASS = WIFI_PASS;
 
 void blink(void* light){
     while(1){
@@ -29,9 +31,9 @@ void setup() {
     //digitalWrite(LED_OUTSIDE,HIGH);
 
     xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
-    const char* ssid = getenv("WIFI_NAME");
-    const char* pass = getenv("WIFI_PASS");
-    Serial.printf("%s %s\n", ssid,pass);
+    Serial.printf("%s %s\n", SSID, PASS);
+
+    // Serial.printf("%s %s\n", ssid,pass);
     // WiFi.begin(ssid,pass);
     // uint16_t seconds = 0;
     // while(WiFi.status() != WL_CONNECTED){
