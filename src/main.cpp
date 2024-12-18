@@ -1,7 +1,13 @@
 #include <Arduino.h>
 #include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "WiFi.h"
+
+WiFiServer server(80);
 const int8_t LED_ONBOARD = 2;
 const int8_t LED_OUTSIDE = 15; 
+const char* ssid = getenv("WIFI_NAME");
+const char* pass = getenv("WIFI_PASS");
 
 void blink(void* light){
     while(1){
@@ -22,6 +28,17 @@ void setup() {
     pinMode(LED_OUTSIDE, OUTPUT); // LED TO POWER other esp chips
 
     digitalWrite(LED_OUTSIDE,HIGH);
+
+    WiFi.begin(ssid,pass);
+    uint16_t seconds = 0;
+    while(WiFi.status() != WL_CONNECTED){
+        Serial.printf("Connecting to Wifi... %is\n", seconds);
+        vTaskDelay(500/portTICK_PERIOD_MS);
+        seconds++;
+    }
+    server.begin();
+    Serial.printf("Wifi connected %is\n", seconds);
+    Serial.printf("ip: %s\n",WiFi.localIP().toString().c_str());
 
     xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
   // put your setup code here, to run once:S
