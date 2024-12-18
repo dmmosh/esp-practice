@@ -30,6 +30,7 @@ void setup() {
     //digitalWrite(LED_OUTSIDE,HIGH);
 
     xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
+    Serial.printf("%s %s\n", ssid,pass);
     WiFi.begin(ssid,pass);
     uint16_t seconds = 0;
     while(WiFi.status() != WL_CONNECTED){
