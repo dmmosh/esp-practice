@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "freertos/FreeRTOS.h"
 const int8_t LED_ONBOARD = 2;
-const int8_t LED_OUTSIDE = 15;
+const int8_t LED_OUTSIDE = 15; 
 
 void blink(void* light){
     while(1){
@@ -18,8 +18,10 @@ void blink(void* light){
 
 void setup() {
     Serial.begin(115200);
-    pinMode(23, OUTPUT); // LED TO POWER other lights
     pinMode(LED_ONBOARD, OUTPUT);
+    pinMode(LED_OUTSIDE, OUTPUT); // LED TO POWER other esp chips
+    
+
 
     xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
   // put your setup code here, to run once:
