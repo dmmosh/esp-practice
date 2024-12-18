@@ -25,10 +25,11 @@ void blink(void* light){
 void setup() {
     Serial.begin(115200);
     pinMode(LED_ONBOARD, OUTPUT);
-    pinMode(LED_OUTSIDE, OUTPUT); // LED TO POWER other esp chips
+    //pinMode(LED_OUTSIDE, OUTPUT); // LED TO POWER other esp chips
 
-    digitalWrite(LED_OUTSIDE,HIGH);
+    //digitalWrite(LED_OUTSIDE,HIGH);
 
+    xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
     WiFi.begin(ssid,pass);
     uint16_t seconds = 0;
     while(WiFi.status() != WL_CONNECTED){
@@ -40,7 +41,6 @@ void setup() {
     Serial.printf("Wifi connected %is\n", seconds);
     Serial.printf("ip: %s\n",WiFi.localIP().toString().c_str());
 
-    xTaskCreate(blink, "led blink",1028,(void*)(&LED_ONBOARD),1,NULL);
   // put your setup code here, to run once:S
 }
 
