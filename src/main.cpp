@@ -51,7 +51,7 @@ pio device monitor -b 115200
 */
 
 void loop() {
-
+    Serial.print("hello\n");
 
     vTaskDelay(5/portTICK_PERIOD_MS);
   // put your main code here, to run repeatedly:
