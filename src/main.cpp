@@ -23,7 +23,7 @@ void blink(void* light){
 
 void setup() {
     Serial.begin(115200);
-    pinMode(LED_ONBOARD, OUTPUT);
+    //pinMode(LED_ONBOARD, OUTPUT);
     //pinMode(LED_OUTSIDE, OUTPUT); // LED TO POWER other esp chips
 
     //digitalWrite(LED_OUTSIDE,HIGH);
