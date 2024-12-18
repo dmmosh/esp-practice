@@ -35,7 +35,7 @@ void setup() {
     WiFi.begin(SSID,PASS);
     uint16_t seconds = 0;
     while(WiFi.status() != WL_CONNECTED){
-        Serial.printf("Connecting to Wifi... %is\n", seconds);
+        Serial.printf("Connecting to Wifi... %is\n", (unsigned int)seconds);
         vTaskDelay(500/portTICK_PERIOD_MS);
         seconds++;
     }
