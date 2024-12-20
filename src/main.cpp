@@ -16,10 +16,9 @@ String input_string(const bool pass){
 
             switch(curr){
                 case '\n':
-                    if(out.length()>0){
-                        Serial.println();
+
+                        Serial.println(out.length());
                         return out;
-                    }
                 break;
                 case '\b':
                     out.remove(out.length()-1);
