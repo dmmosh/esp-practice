@@ -37,14 +37,14 @@ void setup() {
   Serial.begin(115200);
   Serial.setTimeout(10);
 
-  String input1 = input_string(true);
-  Serial.println(input1);
-  String input2 = input_string(false);
-  Serial.println(input2);
   
 }
 void loop() {
 
+  String input1 = input_string(true);
+  Serial.println(input1);
+  String input2 = input_string(false);
+  Serial.println(input2);
 
 
 }
