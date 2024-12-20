@@ -23,7 +23,7 @@ String input_string(const bool pass){
                     Serial.print('\b');
                     Serial.print(' ');
                     Serial.print('\b');
-                    out.remove(input.length()-1);
+                    out = out.substring(input.length()-1);
                 break;
                 default:
                     out += curr;
