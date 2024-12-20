@@ -57,7 +57,7 @@ void setup() {
     Serial.print("ip: ");
     Serial.println(WiFi.localIP());
 
-    DynamicJsonDocument doc(1024);
+    JsonDocument doc;
 
     HTTPClient http;
     
