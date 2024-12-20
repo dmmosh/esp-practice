@@ -65,11 +65,13 @@ void loop() {
     }
     HTTPClient http;
     http.begin("https://httpbin.org/get");
-    int code = http.GET();
-    Serial.println(code);
+    uint16_t code = http.GET();
+    if (code == 200){
+        Serial.println(http.getString());
+    }
 
+    http.end();
 
-    Serial.print("hi ");
 
     vTaskDelay(1000/portTICK_PERIOD_MS);
 }
