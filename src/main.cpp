@@ -52,7 +52,7 @@ void setup() {
         seconds++;
         vTaskDelay(1000/portTICK_PERIOD_MS);
     }
-    Serial.printf("WiFi connected %is\n");
+    Serial.printf("WiFi connected %is\n", seconds);
     Serial.print("ip: ");
     Serial.println(WiFi.localIP());
 }
@@ -63,7 +63,10 @@ void loop() {
         vTaskDelay(1000/portTICK_PERIOD_MS);
         return;
     }
-
+    HTTPClient http;
+    http.begin("https://httpbin.org/get");
+    int code = http.GET();
+    Serial.println(code);
 
 
     Serial.print("hi ");
