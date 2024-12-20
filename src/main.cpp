@@ -22,6 +22,7 @@ String input_string(const bool pass){
                         return out;
                     }
                         out = "";
+                        continue;
                 break;
                 case '\b':
                     out.remove(out.length()-1);
@@ -32,6 +33,7 @@ String input_string(const bool pass){
                 default:
                     out += curr;
                     Serial.print((pass) ? '*' : curr);
+                break;
             }
         }
     }
