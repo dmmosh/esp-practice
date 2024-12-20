@@ -14,20 +14,26 @@ String input_string(const bool pass){
             char curr = Serial.read();
             //str.trim();
 
-            if (curr == '\n'){
-                if(out.length()>1){
-                    Serial.println();
-                    return out;
-                }
-                out = "";
-            } else if (curr == '\b'){
+           
+            switch(curr){
+                case '\n':
+                    if(out.length()>1){
+
+                        Serial.println();
+                        return out;
+                    }
+                    out = "";
+                break;
+                case '\b':
                     out.remove(out.length()-1);
                     Serial.print('\b');
                     Serial.print(' ');
                     Serial.print('\b');
-            } else {
+                break;
+                default:
                     out += curr;
-                    Serial.print((pass) ? '*' : curr);
+                    Serial.print((pass && out.length() > 1) ? '*' : curr);
+                break;
             }
         }
     }
