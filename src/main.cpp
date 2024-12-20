@@ -2,6 +2,7 @@
 #include "freertos/FreeRTOS.h"
 #include "HTTPClient.h"
 #include "WiFi.h"
+#include "ArduinoJson.h"
 #include "../.pio/wifi_pass.h" // wifi pass, in .gitignore
 
 WiFiClient server(80);
@@ -55,6 +56,24 @@ void setup() {
     Serial.printf("WiFi connected %is\n", seconds);
     Serial.print("ip: ");
     Serial.println(WiFi.localIP());
+
+    DynamicJsonDocument doc(1024);
+
+    HTTPClient http;
+    
+    http.begin("https://api.open-meteo.com/v1/forecast?latitude=25.794588&longitude=-80.13483&hourly=temperature_2m");
+    uint16_t code = http.GET();
+
+    if (code == 200)  {
+        deserializeJson(doc,http.getString());
+    }
+
+    http.end();
+
+    Serial.print((char*)doc["latitude"]);
+    Serial.print((char*)doc["longitude"]);
+
+
 }
 
 void loop() {
@@ -63,14 +82,7 @@ void loop() {
         vTaskDelay(1000/portTICK_PERIOD_MS);
         return;
     }
-    HTTPClient http;
-    http.begin("https://api.open-meteo.com/v1/forecast?latitude=25.794588&longitude=-80.13483&hourly=temperature_2m");
-    uint16_t code = http.GET();
-    if (code == 200){
-        Serial.println(http.getString());
-    }
-
-    http.end();
+    
 
 
     vTaskDelay(1000/portTICK_PERIOD_MS);
