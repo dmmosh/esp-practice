@@ -33,6 +33,7 @@ String input_string(const bool pass){
                 default:
                     
                     out += curr;
+                    Serial.print(out.length());
                     Serial.print(curr);
                 break;
             }
