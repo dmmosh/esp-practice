@@ -20,7 +20,7 @@ String input_string(const bool pass){
                     return out;
                 break;
                 case '\b':
-                    out.remove(0);
+                    out.remove(out.length()-1);
                 break;
                 default:
                     out += curr;
