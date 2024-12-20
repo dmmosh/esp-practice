@@ -64,7 +64,7 @@ void loop() {
         return;
     }
     HTTPClient http;
-    http.begin("https://httpbin.org/get");
+    http.begin("https://api.open-meteo.com/v1/forecast?latitude=25.794588&longitude=-80.13483&hourly=temperature_2m");
     uint16_t code = http.GET();
     if (code == 200){
         Serial.println(http.getString());
