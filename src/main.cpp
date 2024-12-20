@@ -7,29 +7,28 @@ WiFiClient client(80);
 String input;
 
 
-inline String input_string(){
-    String out;
+void input_string(String& into){
     while(1){
         if(Serial.available() >0){
             char curr = Serial.read();
             //str.trim();
             switch(curr){
                 case '\n':
-                    if(out.length()>1){
+                    if(into.length()>1){
 
                         Serial.println();
-                        return out;
+                        return;
                     }
-                    out = "";
+                    into = "";
                 break;
                 case '\b':
-                    out.remove(out.length()-1);
+                    into.remove(into.length()-1);
                     Serial.print('\b');
                     Serial.print(' ');
                     Serial.print('\b');
                 break;
                 default:
-                    out += curr;
+                    into += curr;
                     Serial.print(curr);
                 break;
             }
@@ -42,12 +41,12 @@ void setup() {
     Serial.begin(115200);
     Serial.setTimeout(10);
     Serial.print("Wifi name: ");
-    String name = input_string();
-    Serial.print(name);
+    String name;
+    input_string(name);
 
     Serial.print("Wifi password: ");
-    String pass = input_string();
-    Serial.print(pass);
+    String pass;
+    input_string(pass);
 
     WiFi.begin(name.c_str(),pass.c_str());
     uint16_t seconds = 0;
