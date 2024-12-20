@@ -19,7 +19,7 @@ String input_string(const bool pass){
                     Serial.println();
                     return out;
                 break;
-                
+                    out.remove(out.length()-1);
                 default:
                     out += curr;
                     Serial.print((pass) ? '*' : curr);
