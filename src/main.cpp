@@ -3,33 +3,33 @@
 #include "HTTPClient.h"
 #include "WiFi.h"
 
-WiFiClient client(80);
+WiFiClient server(80);
 String input;
 
 
-void input_string(String& into){
+String input_string(){
+    String out;
     while(1){
         if(Serial.available() >0){
             char curr = Serial.read();
             //str.trim();
             switch(curr){
                 case '\n':
-                    if(into.length()>1){
+                    if(out.length()>1){
 
                         Serial.println();
-                        Serial.print(into);
-                        return;
+                        return out;
                     }
-                    into = "";
+                    out = "";
                 break;
                 case '\b':
-                    into.remove(into.length()-1);
+                    out.remove(out.length()-1);
                     Serial.print('\b');
                     Serial.print(' ');
                     Serial.print('\b');
                 break;
                 default:
-                    into += curr;
+                    out += curr;
                     Serial.print(curr);
                 break;
             }
@@ -37,21 +37,21 @@ void input_string(String& into){
     }
 }
 
-
 void setup() {
     Serial.begin(115200);
     Serial.setTimeout(10);
-    Serial.print("Wifi name: ");
-    String name;
-    input_string(name);
+    Serial.println("Wifi name: ");
+    String name = input_string();
 
-    Serial.print("Wifi password: ");
-    String pass;
-    input_string(pass);
+    Serial.println("Wifi password: ");
+    String pass = input_string();
 
-    Serial.println(name);
-    Serial.println(pass);
-    // WiFi.begin(name.c_str(),pass.c_str());
+    Serial.print(name);
+    Serial.print(pass);
+
+    
+
+    // WiFi.begin(name,pass);
     // uint16_t seconds = 0;
     // while(WiFi.status() != WL_CONNECTED){
     //     Serial.printf("Connecting... %is\n", seconds);
