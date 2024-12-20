@@ -55,7 +55,7 @@ void setup() {
     }
     Serial.printf("WiFi connected %is\n", seconds);
     Serial.print("ip: ");
-    Serial.println(WiFi.dnsIP());
+    Serial.println(WiFi.gatewayIP());
 
     JsonDocument doc;
 
