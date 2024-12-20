@@ -49,16 +49,18 @@ void setup() {
     String pass;
     input_string(pass);
 
-    WiFi.begin(name.c_str(),pass.c_str());
-    uint16_t seconds = 0;
-    while(WiFi.status() != WL_CONNECTED){
-        Serial.printf("Connecting... %is\n", seconds);
-        seconds++;
-        vTaskDelay(1000/portTICK_PERIOD_MS);
-    }
-    Serial.println("WiFi connected %is\n");
-    Serial.println("ip: ");
-    Serial.println(WiFi.localIP());
+    Serial.println(name);
+    Serial.println(pass);
+    // WiFi.begin(name.c_str(),pass.c_str());
+    // uint16_t seconds = 0;
+    // while(WiFi.status() != WL_CONNECTED){
+    //     Serial.printf("Connecting... %is\n", seconds);
+    //     seconds++;
+    //     vTaskDelay(1000/portTICK_PERIOD_MS);
+    // }
+    // Serial.println("WiFi connected %is\n");
+    // Serial.println("ip: ");
+    // Serial.println(WiFi.localIP());
 }
 
 void loop() {
