@@ -70,9 +70,7 @@ void setup() {
 
     http.end();
 
-    Serial.print((const char*)doc["latitude"]);
-    Serial.print((const char*)doc["longitude"]);
-
+    serializeJson(doc,Serial);
 
 }
 
