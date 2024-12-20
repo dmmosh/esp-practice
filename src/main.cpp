@@ -19,6 +19,7 @@ String input_string(const bool pass){
                     Serial.println();
                     return out;
                 }
+                out = "";
             } else if (curr == '\b'){
                     out.remove(out.length()-1);
                     Serial.print('\b');
