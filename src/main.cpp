@@ -55,14 +55,24 @@ void setup() {
     }
     Serial.printf("WiFi connected %is\n", seconds);
     Serial.print("ip: ");
-    Serial.println(WiFi.broadcastIP());
+    Serial.println(WiFi.localIP());
 
     JsonDocument doc;
 
     HTTPClient http;
+
+    http.begin("https://httpbin.org/ip");
+    uint16_t code = http.GET();
+    if (code == 200){
+        deserializeJson(doc, http.getString());
+    }
+    Serial.println((const char* )doc["origin"]);
+
+    http.end();
+
     
     http.begin("https://api.open-meteo.com/v1/forecast?latitude=25.794588&longitude=-80.13483&hourly=temperature_2m");
-    uint16_t code = http.GET();
+    code = http.GET();
 
     if (code == 200)  {
         deserializeJson(doc,http.getString());
