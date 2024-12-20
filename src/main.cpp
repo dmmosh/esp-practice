@@ -70,10 +70,7 @@ void setup() {
 
     http.end();
 
-    double i;
-    serializeJson(doc["latitude"],i);
-    Serial.print(i);
-
+    Serial.print(doc["timezone"]);
 }
 
 void loop() {
