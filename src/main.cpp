@@ -7,7 +7,7 @@ WiFiClient client(80);
 String input;
 
 
-String input_string(){
+inline String input_string(){
     String out;
     while(1){
         if(Serial.available() >0){
