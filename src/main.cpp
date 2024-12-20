@@ -70,7 +70,7 @@ void setup() {
 
     http.end();
 
-    Serial.print(doc["timezone"]);
+    Serial.print((const char*)doc["timezone"]);
 }
 
 void loop() {
