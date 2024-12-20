@@ -32,8 +32,9 @@ String input_string(const bool pass){
                 break;
                 default:
                     out += curr;
-                    if(out[0] == '\0') break;
-                    Serial.print((pass) ? '*' : curr);
+                    if(pass) curr = '*';
+                    
+                    Serial.print(curr);
                 break;
             }
         }
