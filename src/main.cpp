@@ -18,9 +18,10 @@ String input_string(const bool pass){
                 case '\n':
                     if(out.length()>1){
 
-                        Serial.println(out.length());
+                        Serial.println();
                         return out;
                     }
+                        out = "";
                 break;
                 case '\b':
                     out.remove(out.length()-1);
