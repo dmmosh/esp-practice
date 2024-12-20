@@ -16,6 +16,7 @@ String input_string(const bool pass){
 
             switch(curr){
                 case '\n':
+                    Serial.println();
                     return out;
                 break;
                 case '\b':
@@ -37,20 +38,14 @@ void setup() {
   Serial.setTimeout(10);
 
   String input1 = input_string(true);
-  Serial.print(input1);
+  Serial.println(input1);
   String input2 = input_string(false);
-  Serial.print(input2);
+  Serial.println(input2);
   
 }
 void loop() {
 
-  if (Serial.available() > 0) {
-    
 
-
-
-
-  }
 
 }
 
