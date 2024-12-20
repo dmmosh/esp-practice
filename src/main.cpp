@@ -2,13 +2,15 @@
 #include "freertos/FreeRTOS.h"
 #include "HTTPClient.h"
 #include "WiFi.h"
+#include "../.pio/wifi_pass.h" // wifi pass, in .gitignore
 
 WiFiClient server(80);
-String input;
 
 
 String input_string(){
     String out;
+
+
     while(1){
         if(Serial.available() >0){
             char curr = Serial.read();
@@ -40,27 +42,19 @@ String input_string(){
 void setup() {
     Serial.begin(115200);
     Serial.setTimeout(10);
-    Serial.println("Wifi name: ");
-    String name = input_string();
-
-    Serial.println("Wifi password: ");
-    String pass = input_string();
-
-    Serial.print(name);
-    Serial.print(pass);
 
     
 
-    // WiFi.begin(name,pass);
-    // uint16_t seconds = 0;
-    // while(WiFi.status() != WL_CONNECTED){
-    //     Serial.printf("Connecting... %is\n", seconds);
-    //     seconds++;
-    //     vTaskDelay(1000/portTICK_PERIOD_MS);
-    // }
-    // Serial.println("WiFi connected %is\n");
-    // Serial.println("ip: ");
-    // Serial.println(WiFi.localIP());
+    WiFi.begin(WIFI_NAME,WIFI_PASS);
+    uint16_t seconds = 0;
+    while(WiFi.status() != WL_CONNECTED){
+        Serial.printf("Connecting... %is\n", seconds);
+        seconds++;
+        vTaskDelay(1000/portTICK_PERIOD_MS);
+    }
+    Serial.println("WiFi connected %is\n");
+    Serial.println("ip: ");
+    Serial.println(WiFi.localIP());
 }
 
 void loop() {
