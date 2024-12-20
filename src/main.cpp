@@ -6,25 +6,50 @@
 WiFiClient server(80);
 String input;
 
+
+String input_string(const bool pass){
+    String out;
+    while(1){
+        if(Serial.available() >0){
+            char curr = Serial.read();
+            //str.trim();
+
+            switch(curr){
+                case '\n':
+                    return out;
+                break;
+                case '\b':
+                    Serial.print('\b');
+                    Serial.print(' ');
+                    Serial.print('\b');
+                    out.remove(input.length()-1);
+                break;
+                default:
+                    out += curr;
+                    Serial.print((pass) ? '*' : curr);
+            }
+        }
+    }
+}
+
 void setup() {
   Serial.begin(115200);
   Serial.setTimeout(10);
+
+  String input1 = input_string(true);
+  Serial.print(input1);
+  String input2 = input_string(false);
+  Serial.print(input2);
+  
 }
 void loop() {
 
   if (Serial.available() > 0) {
-    input += Serial.readString();
-    //str.trim();
-    switch(*(input.end()-1))
-
-    Serial.print('*');
+    
 
 
 
-    if (*(input.end()-1) == '\n'){
-        Serial.print(input);
-        input="";
-    }
+
   }
 
 }
