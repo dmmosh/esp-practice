@@ -21,6 +21,9 @@ String input_string(const bool pass){
                 break;
                 case '\b':
                     out.remove(out.length()-1);
+                    Serial.print('\b');
+                    Serial.print(' ');
+                    Serial.print('\b');
                 break;
                 default:
                     out += curr;
