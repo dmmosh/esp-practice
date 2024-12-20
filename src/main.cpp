@@ -52,8 +52,8 @@ void setup() {
         seconds++;
         vTaskDelay(1000/portTICK_PERIOD_MS);
     }
-    Serial.println("WiFi connected %is\n");
-    Serial.println("ip: ");
+    Serial.printf("WiFi connected %is\n");
+    Serial.print("ip: ");
     Serial.println(WiFi.localIP());
 }
 
