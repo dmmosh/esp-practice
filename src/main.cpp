@@ -70,7 +70,9 @@ void setup() {
 
     http.end();
 
-    serializeJson(doc,Serial);
+    double i;
+    serializeJson(doc["latitude"],i);
+    Serial.print(i);
 
 }
 
