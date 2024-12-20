@@ -19,12 +19,7 @@ String input_string(const bool pass){
                     Serial.println();
                     return out;
                 break;
-                case '\b':
-                    Serial.print('\b');
-                    Serial.print(' ');
-                    Serial.print('\b');
-                    out = out.substring(input.length()-1);
-                break;
+                
                 default:
                     out += curr;
                     Serial.print((pass) ? '*' : curr);
