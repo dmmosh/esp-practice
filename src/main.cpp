@@ -31,8 +31,9 @@ String input_string(const bool pass){
                     Serial.print('\b');
                 break;
                 default:
+                    Serial.print(out.length());
                     out += curr;
-                    Serial.print((pass && out[0] != '\0') ? '*' : curr);
+                    Serial.print((pass) ? '*' : curr);
                 break;
             }
         }
