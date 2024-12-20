@@ -8,6 +8,7 @@
 WiFiClient server(80);
 
 
+
 String input_string(){
     String out;
 
@@ -55,10 +56,6 @@ void setup() {
     }
     Serial.printf("WiFi connected %is\n", seconds);
     Serial.print("ip: ");
-    Serial.println(WiFi.localIP());
-    Serial.println(WiFi.dnsIP());
-    Serial.println(WiFi.gatewayIP());
-    Serial.println(WiFi.broadcastIP());
 
     JsonDocument doc;
 
@@ -69,7 +66,9 @@ void setup() {
     if (code == 200){
         deserializeJson(doc, http.getString());
     }
-    Serial.println((const char* )doc["origin"]);
+
+    const char* ip = doc["origin"];
+    Serial.println(ip);
 
     http.end();
 
