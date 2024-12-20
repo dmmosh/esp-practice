@@ -3,7 +3,7 @@
 #include "HTTPClient.h"
 #include "WiFi.h"
 
-WiFiClient server(80);
+WiFiClient client(80);
 String input;
 
 
@@ -41,13 +41,15 @@ String input_string(){
 void setup() {
     Serial.begin(115200);
     Serial.setTimeout(10);
-    Serial.println("Wifi name: ");
+    Serial.print("Wifi name: ");
     String name = input_string();
+    Serial.print(name);
 
-    Serial.println("Wifi password: ");
+    Serial.print("Wifi password: ");
     String pass = input_string();
+    Serial.print(pass);
 
-    WiFi.begin(name,pass);
+    WiFi.begin(name.c_str(),pass.c_str());
     uint16_t seconds = 0;
     while(WiFi.status() != WL_CONNECTED){
         Serial.printf("Connecting... %is\n", seconds);
