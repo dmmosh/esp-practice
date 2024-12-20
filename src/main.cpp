@@ -17,6 +17,7 @@ void input_string(String& into){
                     if(into.length()>1){
 
                         Serial.println();
+                        Serial.print(into);
                         return;
                     }
                     into = "";
