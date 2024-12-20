@@ -70,8 +70,8 @@ void setup() {
 
     http.end();
 
-    Serial.print((char*)doc["latitude"]);
-    Serial.print((char*)doc["longitude"]);
+    Serial.print((const char*)doc["latitude"]);
+    Serial.print((const char*)doc["longitude"]);
 
 
 }
