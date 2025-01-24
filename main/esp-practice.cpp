@@ -8,6 +8,10 @@
 #include "driver/gpio.h"
 
 
+extern "C"{
+    void app_main(void);
+}
+
 void app_main(void)
 {
     gpio_reset_pin(GPIO_NUM_2);
