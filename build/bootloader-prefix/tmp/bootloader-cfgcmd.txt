@@ -1,1 +1,0 @@
-cmd='/usr/bin/cmake;-DSDKCONFIG=/home/wetsock/coding/esp-practice/sdkconfig;-DIDF_PATH=/opt/esp-idf;-DIDF_TARGET=esp32;-DPYTHON_DEPS_CHECKED=1;-DPYTHON=python;-DEXTRA_COMPONENT_DIRS=/opt/esp-idf/components/bootloader;-DPROJECT_SOURCE_DIR=/home/wetsock/coding/esp-practice;-DIGNORE_EXTRA_COMPONENT=;-GNinja;-S;<SOURCE_DIR><SOURCE_SUBDIR>;-B;<BINARY_DIR>'
