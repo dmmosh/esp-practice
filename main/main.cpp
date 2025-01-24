@@ -26,7 +26,7 @@
 static const char local_device_name[] = "Testing";
 
 extern "C"{
-    void main(void);
+    void app_main(void);
 }
 
 typedef struct {
