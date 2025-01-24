@@ -1,18 +1,15 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+#define CONTROL 15
 
 void setup() {
+  pinMode(CONTROL, OUTPUT);
   // put your setup code here, to run once:
-  int result = myFunction(2, 3);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  digitalWrite(CONTROL,HIGH);
+  vTaskDelay(1000/portTICK_PERIOD_MS);
+  digitalWrite(CONTROL,LOW);
+  vTaskDelay(1000/portTICK_PERIOD_MS);
 }
