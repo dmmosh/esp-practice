@@ -25,6 +25,10 @@
 
 static const char local_device_name[] = "Testing";
 
+extern "C"{
+    void main(void);
+}
+
 typedef struct {
     esp_hidd_app_param_t app_param;
     esp_hidd_qos_param_t both_qos;
