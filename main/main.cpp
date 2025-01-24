@@ -30,17 +30,14 @@ extern "C"{
     void app_main(void);
 }
 
-struct {
-    esp_hidd_app_param_t app_param;
-    esp_hidd_qos_param_t both_qos;
-    uint8_t protocol_mode;
-    SemaphoreHandle_t mouse_mutex;
-    TaskHandle_t mouse_task_hdl;
-    uint8_t buffer[REPORT_BUFFER_SIZE];
-    int8_t x_dir;
-} local_param_t;
+esp_hidd_app_param_t app_param;
+esp_hidd_qos_param_t both_qos;
+uint8_t protocol_mode;
+SemaphoreHandle_t mouse_mutex;
+TaskHandle_t mouse_task_hdl;
+uint8_t buffer[REPORT_BUFFER_SIZE];
+int8_t x_dir;
 
-static local_param_t s_local_param = {0};
 
 // HID report descriptor for a generic mouse. The contents of the report are:
 // 3 buttons, moving information for X and Y cursors, information for a wheel.
@@ -101,12 +98,12 @@ const int hid_mouse_descriptor_len = sizeof(hid_mouse_descriptor);
 bool check_report_id_type(uint8_t report_id, uint8_t report_type)
 {
     bool ret = false;
-    xSemaphoreTake(s_local_param.mouse_mutex, portMAX_DELAY);
+    xSemaphoreTake(mouse_mutex, portMAX_DELAY);
     do {
         if (report_type != ESP_HIDD_REPORT_TYPE_INPUT) {
             break;
         }
-        if (s_local_param.protocol_mode == ESP_HIDD_BOOT_MODE) {
+        if (protocol_mode == ESP_HIDD_BOOT_MODE) {
             if (report_id == ESP_HIDD_BOOT_REPORT_ID_MOUSE) {
                 ret = true;
                 break;
@@ -120,13 +117,13 @@ bool check_report_id_type(uint8_t report_id, uint8_t report_type)
     } while (0);
 
     if (!ret) {
-        if (s_local_param.protocol_mode == ESP_HIDD_BOOT_MODE) {
+        if (protocol_mode == ESP_HIDD_BOOT_MODE) {
             esp_bt_hid_device_report_error(ESP_HID_PAR_HANDSHAKE_RSP_ERR_INVALID_REP_ID);
         } else {
             esp_bt_hid_device_report_error(ESP_HID_PAR_HANDSHAKE_RSP_ERR_INVALID_REP_ID);
         }
     }
-    xSemaphoreGive(s_local_param.mouse_mutex);
+    xSemaphoreGive(mouse_mutex);
     return ret;
 }
 
@@ -135,24 +132,24 @@ void send_mouse_report(uint8_t buttons, char dx, char dy, char wheel)
 {
     uint8_t report_id;
     uint16_t report_size;
-    xSemaphoreTake(s_local_param.mouse_mutex, portMAX_DELAY);
-    if (s_local_param.protocol_mode == ESP_HIDD_REPORT_MODE) {
+    xSemaphoreTake(mouse_mutex, portMAX_DELAY);
+    if (protocol_mode == ESP_HIDD_REPORT_MODE) {
         report_id = 0;
         report_size = REPORT_PROTOCOL_MOUSE_REPORT_SIZE;
-        s_local_param.buffer[0] = buttons;
-        s_local_param.buffer[1] = dx;
-        s_local_param.buffer[2] = dy;
-        s_local_param.buffer[3] = wheel;
+        buffer[0] = buttons;
+        buffer[1] = dx;
+        buffer[2] = dy;
+        buffer[3] = wheel;
     } else {
         // Boot Mode
         report_id = ESP_HIDD_BOOT_REPORT_ID_MOUSE;
         report_size = ESP_HIDD_BOOT_REPORT_SIZE_MOUSE - 1;
-        s_local_param.buffer[0] = buttons;
-        s_local_param.buffer[1] = dx;
-        s_local_param.buffer[2] = dy;
+        buffer[0] = buttons;
+        buffer[1] = dx;
+        buffer[2] = dy;
     }
-    esp_bt_hid_device_send_report(ESP_HIDD_REPORT_TYPE_INTRDATA, report_id, report_size, s_local_param.buffer);
-    xSemaphoreGive(s_local_param.mouse_mutex);
+    esp_bt_hid_device_send_report(ESP_HIDD_REPORT_TYPE_INTRDATA, report_id, report_size, buffer);
+    xSemaphoreGive(mouse_mutex);
 }
 
 // move the mouse left and right
@@ -162,14 +159,14 @@ void mouse_move_task(void *pvParameters)
 
     ESP_LOGI(TAG, "starting");
     for (;;) {
-        s_local_param.x_dir = 1;
+        x_dir = 1;
         int8_t step = 10;
         for (int i = 0; i < 2; i++) {
-            xSemaphoreTake(s_local_param.mouse_mutex, portMAX_DELAY);
-            s_local_param.x_dir *= -1;
-            xSemaphoreGive(s_local_param.mouse_mutex);
+            xSemaphoreTake(mouse_mutex, portMAX_DELAY);
+            x_dir *= -1;
+            xSemaphoreGive(mouse_mutex);
             for (int j = 0; j < 100; j++) {
-                send_mouse_report(0, s_local_param.x_dir * step, 0, 0);
+                send_mouse_report(0, x_dir * step, 0, 0);
                 vTaskDelay(50 / portTICK_PERIOD_MS);
             }
         }
@@ -232,22 +229,22 @@ void esp_bt_gap_cb(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *param)
 
 void bt_app_task_start_up(void)
 {
-    s_local_param.mouse_mutex = xSemaphoreCreateMutex();
-    memset(s_local_param.buffer, 0, REPORT_BUFFER_SIZE);
-    xTaskCreate(mouse_move_task, "mouse_move_task", 2 * 1024, NULL, configMAX_PRIORITIES - 3, &s_local_param.mouse_task_hdl);
+    mouse_mutex = xSemaphoreCreateMutex();
+    memset(buffer, 0, REPORT_BUFFER_SIZE);
+    xTaskCreate(mouse_move_task, "mouse_move_task", 2 * 1024, NULL, configMAX_PRIORITIES - 3, &mouse_task_hdl);
     return;
 }
 
 void bt_app_task_shut_down(void)
 {
-    if (s_local_param.mouse_task_hdl) {
-        vTaskDelete(s_local_param.mouse_task_hdl);
-        s_local_param.mouse_task_hdl = NULL;
+    if (mouse_task_hdl) {
+        vTaskDelete(mouse_task_hdl);
+        mouse_task_hdl = NULL;
     }
 
-    if (s_local_param.mouse_mutex) {
-        vSemaphoreDelete(s_local_param.mouse_mutex);
-        s_local_param.mouse_mutex = NULL;
+    if (mouse_mutex) {
+        vSemaphoreDelete(mouse_mutex);
+        mouse_mutex = NULL;
     }
     return;
 }
@@ -259,7 +256,7 @@ void esp_bt_hidd_cb(esp_hidd_cb_event_t event, esp_hidd_cb_param_t *param)
     case ESP_HIDD_INIT_EVT:
         if (param->init.status == ESP_HIDD_SUCCESS) {
             ESP_LOGI(TAG, "setting hid parameters");
-            esp_bt_hid_device_register_app(&s_local_param.app_param, &s_local_param.both_qos, &s_local_param.both_qos);
+            esp_bt_hid_device_register_app(&app_param, &both_qos, &both_qos);
         } else {
             ESP_LOGE(TAG, "init hidd failed!");
         }
@@ -340,7 +337,7 @@ void esp_bt_hidd_cb(esp_hidd_cb_event_t event, esp_hidd_cb_param_t *param)
         if (check_report_id_type(param->get_report.report_id, param->get_report.report_type)) {
             uint8_t report_id;
             uint16_t report_len;
-            if (s_local_param.protocol_mode == ESP_HIDD_REPORT_MODE) {
+            if (protocol_mode == ESP_HIDD_REPORT_MODE) {
                 report_id = 0;
                 report_len = REPORT_PROTOCOL_MOUSE_REPORT_SIZE;
             } else {
@@ -348,9 +345,9 @@ void esp_bt_hidd_cb(esp_hidd_cb_event_t event, esp_hidd_cb_param_t *param)
                 report_id = ESP_HIDD_BOOT_REPORT_ID_MOUSE;
                 report_len = ESP_HIDD_BOOT_REPORT_SIZE_MOUSE - 1;
             }
-            xSemaphoreTake(s_local_param.mouse_mutex, portMAX_DELAY);
-            esp_bt_hid_device_send_report(param->get_report.report_type, report_id, report_len, s_local_param.buffer);
-            xSemaphoreGive(s_local_param.mouse_mutex);
+            xSemaphoreTake(mouse_mutex, portMAX_DELAY);
+            esp_bt_hid_device_send_report(param->get_report.report_type, report_id, report_len, buffer);
+            xSemaphoreGive(mouse_mutex);
         } else {
             ESP_LOGE(TAG, "check_report_id failed!");
         }
@@ -362,15 +359,15 @@ void esp_bt_hidd_cb(esp_hidd_cb_event_t event, esp_hidd_cb_param_t *param)
         ESP_LOGI(TAG, "ESP_HIDD_SET_PROTOCOL_EVT");
         if (param->set_protocol.protocol_mode == ESP_HIDD_BOOT_MODE) {
             ESP_LOGI(TAG, "  - boot protocol");
-            xSemaphoreTake(s_local_param.mouse_mutex, portMAX_DELAY);
-            s_local_param.x_dir = -1;
-            xSemaphoreGive(s_local_param.mouse_mutex);
+            xSemaphoreTake(mouse_mutex, portMAX_DELAY);
+            x_dir = -1;
+            xSemaphoreGive(mouse_mutex);
         } else if (param->set_protocol.protocol_mode == ESP_HIDD_REPORT_MODE) {
             ESP_LOGI(TAG, "  - report protocol");
         }
-        xSemaphoreTake(s_local_param.mouse_mutex, portMAX_DELAY);
-        s_local_param.protocol_mode = param->set_protocol.protocol_mode;
-        xSemaphoreGive(s_local_param.mouse_mutex);
+        xSemaphoreTake(mouse_mutex, portMAX_DELAY);
+        protocol_mode = param->set_protocol.protocol_mode;
+        xSemaphoreGive(mouse_mutex);
         break;
     case ESP_HIDD_INTR_DATA_EVT:
         ESP_LOGI(TAG, "ESP_HIDD_INTR_DATA_EVT");
@@ -454,18 +451,18 @@ void app_main(void)
     // Initialize HID SDP information and L2CAP parameters.
     // to be used in the call of `esp_bt_hid_device_register_app` after profile initialization finishes
     do {
-        s_local_param.app_param.name = "Mouse";
-        s_local_param.app_param.description = "Mouse Example";
-        s_local_param.app_param.provider = "ESP32";
-        s_local_param.app_param.subclass = ESP_HID_CLASS_MIC; // keep same with minor class of COD
-        s_local_param.app_param.desc_list = hid_mouse_descriptor;
-        s_local_param.app_param.desc_list_len = hid_mouse_descriptor_len;
+        app_param.name = "Mouse";
+        app_param.description = "Mouse Example";
+        app_param.provider = "ESP32";
+        app_param.subclass = ESP_HID_CLASS_MIC; // keep same with minor class of COD
+        app_param.desc_list = hid_mouse_descriptor;
+        app_param.desc_list_len = hid_mouse_descriptor_len;
 
-        memset(&s_local_param.both_qos, 0, sizeof(esp_hidd_qos_param_t)); // don't set the qos parameters
+        memset(&both_qos, 0, sizeof(esp_hidd_qos_param_t)); // don't set the qos parameters
     } while (0);
 
     // Report Protocol Mode is the default mode, according to Bluetooth HID specification
-    s_local_param.protocol_mode = ESP_HIDD_REPORT_MODE;
+    protocol_mode = ESP_HIDD_REPORT_MODE;
 
     ESP_LOGI(TAG, "register hid device callback");
     esp_bt_hid_device_register_callback(esp_bt_hidd_cb);
