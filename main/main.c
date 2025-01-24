@@ -23,7 +23,7 @@
 #define REPORT_PROTOCOL_MOUSE_REPORT_SIZE      (4)
 #define REPORT_BUFFER_SIZE                     REPORT_PROTOCOL_MOUSE_REPORT_SIZE
 
-static const char local_device_name[] = CONFIG_EXAMPLE_LOCAL_DEVICE_NAME;
+static const char local_device_name[] = "hello";
 
 typedef struct {
     esp_hidd_app_param_t app_param;
