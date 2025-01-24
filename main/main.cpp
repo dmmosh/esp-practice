@@ -30,7 +30,7 @@ extern "C"{
     void app_main(void);
 }
 
-typedef struct {
+struct {
     esp_hidd_app_param_t app_param;
     esp_hidd_qos_param_t both_qos;
     uint8_t protocol_mode;
