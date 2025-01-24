@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "esp-practice",
-    "project_version":    "1",
+    "project_version":    "0890b4e-dirty",
     "project_path":       "/home/wetsock/coding/esp-practice",
     "idf_path":           "/opt/esp-idf",
     "build_dir":          "/home/wetsock/coding/esp-practice/build",
@@ -1195,7 +1195,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "/home/wetsock/coding/esp-practice/build/esp-idf/main/libmain.a",
-            "sources": [ "/home/wetsock/coding/esp-practice/main/esp-practice.c" ],
+            "sources": [ "/home/wetsock/coding/esp-practice/main/esp-practice.cpp" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {

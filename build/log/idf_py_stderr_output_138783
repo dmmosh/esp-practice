@@ -1,0 +1,44 @@
+fatal: detected dubious ownership in repository at '/opt/esp-idf'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /opt/esp-idf
+CMake Deprecation Warning at /opt/esp-idf/components/mbedtls/mbedtls/CMakeLists.txt:21 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+fatal: detected dubious ownership in repository at '/opt/esp-idf'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /opt/esp-idf
+fatal: detected dubious ownership in repository at '/opt/esp-idf/components/openthread/openthread'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /opt/esp-idf/components/openthread/openthread
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/wetsock/.espressif/python_env/idf5.4_py3.13_env/lib/python3.13/site-packages/esptool/__main__.py", line 9, in <module>
+    esptool._main()
+    ~~~~~~~~~~~~~^^
+  File "/home/wetsock/.espressif/python_env/idf5.4_py3.13_env/lib/python3.13/site-packages/esptool/__init__.py", line 1314, in _main
+    main()
+    ~~~~^^
+  File "/home/wetsock/.espressif/python_env/idf5.4_py3.13_env/lib/python3.13/site-packages/esptool/__init__.py", line 1036, in main
+    operation_func(esp, args)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/wetsock/.espressif/python_env/idf5.4_py3.13_env/lib/python3.13/site-packages/esptool/cmds.py", line 491, in write_flash
+    if set_flash_size and set_flash_size > flash_end:
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'int' and 'NoneType'
+CMake Error at run_serial_tool.cmake:67 (message):
+  
+  /home/wetsock/.espressif/python_env/idf5.4_py3.13_env/bin/python;;/opt/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32
+  failed.
+
+
+
