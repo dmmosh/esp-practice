@@ -18,14 +18,8 @@ void loop()
   // Send Output DC Voltage Raw Values To The DAC
   // (0  64  128 192 255)
   // Insert Delay After Each Sample Output
-  dacWrite(DAC_CH1, 0);
-  delay(100);
-  dacWrite(DAC_CH1, 64);
-  delay(100);
-  dacWrite(DAC_CH1, 128);
-  delay(100);
-  dacWrite(DAC_CH1, 192);
-  delay(100);
-  dacWrite(DAC_CH1, 255);
-  delay(100);
+  for(int i =0; i<256; i++){
+      dacWrite(DAC_CH1, i);
+      delay(10);
+  }
 }
