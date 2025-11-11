@@ -27,12 +27,10 @@ void loop() {
   //Serial.print("loop\n");
   int dist = sensor.readRangeSingleMillimeters();
   Serial.printf("cm: %i.%i", dist/10, dist%10);
-  Serial.print("\tstatus: ");
-  Serial.print(VL53L1X::rangeStatusToString(sensor.ranging_data.range_status));
-  Serial.print("\tpeak signal: ");
-  Serial.print(sensor.ranging_data.peak_signal_count_rate_MCPS);
   Serial.print("\tambient: ");
   Serial.print(sensor.ranging_data.ambient_count_rate_MCPS);
+  Serial.print("\tpeak signal: ");
+  Serial.print(sensor.ranging_data.peak_signal_count_rate_MCPS);
   Serial.println();
   delay(500);
 }
