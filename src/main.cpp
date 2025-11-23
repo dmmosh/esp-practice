@@ -6,8 +6,8 @@
 void setup(){
   Serial.begin(115200);
   pinMode(LED, OUTPUT);
-  pinMode(DPLUS,INPUT);
-  pinMode(DMINUS,INPUT);
+  pinMode(DPLUS,INPUT_PULLUP);
+  pinMode(DMINUS,INPUT_PULLUP);
 }
 
 void loop(){
